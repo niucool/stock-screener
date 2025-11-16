@@ -20,6 +20,8 @@ logging.basicConfig(
 DATA_DIR = '../data'
 PROCESSED_DIR = os.path.join(DATA_DIR, 'stocks', 'processed')
 SP500_CSV = os.path.join(DATA_DIR, 'sp500_companies.csv')
+CONFIG_DIR = '../config'
+INDICATORS_CONFIG = os.path.join(CONFIG_DIR, 'indicators_config.json')
 
 def load_sp500_companies():
     try:
@@ -61,81 +63,193 @@ def load_stock_data(symbol=None):
         return stock_data
 
 
+def load_indicators_config():
+    """Load indicators configuration from JSON file"""
+    try:
+        with open(INDICATORS_CONFIG, 'r') as f:
+            config = json.load(f)
+        logging.info("Loaded indicators configuration.")
+        return config
+    except Exception as e:
+        logging.error(f"Error loading indicators configuration: {e}")
+        return None
+
+def apply_filters(data, filters):
+    """
+    Generic filter application function that works with any indicator.
+    Filters format: {'indicator_name': {'from': value, 'to': value}}
+    """
+    for indicator, bounds in filters.items():
+        if indicator not in data:
+            continue
+
+        value = data[indicator]
+        if value is None:
+            return False
+
+        from_val = bounds.get('from')
+        to_val = bounds.get('to')
+
+        if from_val is not None and value < from_val:
+            return False
+        if to_val is not None and value > to_val:
+            return False
+
+    return True
+
+@app.route('/api/config/indicators', methods=['GET'])
+def get_indicators_config():
+    """Get the indicators configuration"""
+    config = load_indicators_config()
+    if config:
+        return jsonify(config), 200
+    else:
+        return jsonify({"error": "Configuration not available"}), 500
+
+@app.route('/api/config/presets', methods=['GET'])
+def get_presets():
+    """Get all preset strategies"""
+    config = load_indicators_config()
+    if config and 'preset_strategies' in config:
+        return jsonify(config['preset_strategies']), 200
+    else:
+        return jsonify({"error": "Presets not available"}), 500
+
 @app.route('/api/sp500', methods=['GET'])
 def get_sp500():
     companies = load_sp500_companies()
     return jsonify(companies), 200
-#http://localhost:5001/api/stock-all-data?williamsR_from=-100&williamsR_to=-80&rsi14_from=100
 
 @app.route('/api/stock-all-data', methods=['GET'])
 def get_all_stock_data():
+    """
+    Enhanced endpoint that supports dynamic filtering on any indicator.
+    Query params: <indicator>_from and <indicator>_to for range filters
+    Special params: preset (apply a preset strategy), max_age (filter by data freshness)
+    """
     try:
-        # Retrieve interval filter parameters from query string
-        williams_r_from = request.args.get('williamsR_from', type=float)
-        williams_r_to = request.args.get('williamsR_to', type=float)
-        ema_williams_r_from = request.args.get('emaWilliamsR_from', type=float)
-        ema_williams_r_to = request.args.get('emaWilliamsR_to', type=float)
-        rsi14_from = request.args.get('rsi14_from', type=float)
-        rsi14_to = request.args.get('rsi14_to', type=float)
-        rsi21_from = request.args.get('rsi21_from', type=float)
-        rsi21_to = request.args.get('rsi21_to', type=float)
-        
-        # Initialize list to hold filtered stock data
-        filtered_data = []
-        
+        # Check if a preset is requested
+        preset_name = request.args.get('preset')
+        filters = {}
+
+        if preset_name:
+            # Load preset configuration
+            config = load_indicators_config()
+            if config and 'preset_strategies' in config:
+                preset = config['preset_strategies'].get(preset_name)
+                if preset:
+                    filters = preset.get('filters', {})
+                    logging.info(f"Applying preset: {preset_name}")
+                else:
+                    return jsonify({"error": f"Preset '{preset_name}' not found"}), 400
+        else:
+            # Build filters from query parameters dynamically
+            for key in request.args.keys():
+                if key.endswith('_from'):
+                    indicator = key[:-5]  # Remove '_from'
+                    from_val = request.args.get(key, type=float)
+                    if indicator not in filters:
+                        filters[indicator] = {}
+                    filters[indicator]['from'] = from_val
+                elif key.endswith('_to'):
+                    indicator = key[:-3]  # Remove '_to'
+                    to_val = request.args.get(key, type=float)
+                    if indicator not in filters:
+                        filters[indicator] = {}
+                    filters[indicator]['to'] = to_val
+
+        # Data age filter (optional)
+        max_age = request.args.get('max_age', type=int)
+
         # Load all stock data
         stock_data = load_stock_data()
-        
+
         if not stock_data:
             logging.warning("No stock data available to filter.")
             return jsonify({"error": "No stock data available"}), 404
-        
-        # Iterate through each stock data entry
+
+        # Apply filters
+        filtered_data = []
         for data in stock_data:
-            # Flag to determine if the current entry should be included
-            include = True
-            
-            # Apply Williams %R filter
-            if williams_r_from is not None:
-                if data.get('Williams_R_21') is None or data['Williams_R_21'] < williams_r_from:
-                    include = False
-            if williams_r_to is not None:
-                if data.get('Williams_R_21') is None or data['Williams_R_21'] > williams_r_to:
-                    include = False
-            
-            # Apply EMA(13) of Williams %R filter
-            if ema_williams_r_from is not None:
-                if data.get('EMA_13_Williams_R') is None or data['EMA_13_Williams_R'] < ema_williams_r_from:
-                    include = False
-            if ema_williams_r_to is not None:
-                if data.get('EMA_13_Williams_R') is None or data['EMA_13_Williams_R'] > ema_williams_r_to:
-                    include = False
-            
-            # Apply RSI 14 filter
-            if rsi14_from is not None:
-                if data.get('RSI_14') is None or data['RSI_14'] < rsi14_from:
-                    include = False
-            if rsi14_to is not None:
-                if data.get('RSI_14') is None or data['RSI_14'] > rsi14_to:
-                    include = False
-            
-            # Apply RSI 21 filter
-            if rsi21_from is not None:
-                if data.get('RSI_21') is None or data['RSI_21'] < rsi21_from:
-                    include = False
-            if rsi21_to is not None:
-                if data.get('RSI_21') is None or data['RSI_21'] > rsi21_to:
-                    include = False
-            
-            # If all filters pass, include the data entry
-            if include:
+            # Check data age if specified
+            if max_age is not None:
+                data_age = data.get('Data_Age_Days', float('inf'))
+                if data_age > max_age:
+                    continue
+
+            # Apply indicator filters
+            if apply_filters(data, filters):
                 filtered_data.append(data)
-        
-        logging.info(f"Served {len(filtered_data)} filtered stock data entries.")
+
+        # Sort by symbol
+        filtered_data.sort(key=lambda x: x.get('Symbol', ''))
+
+        logging.info(f"Served {len(filtered_data)} filtered stock data entries out of {len(stock_data)} total.")
         return jsonify(filtered_data), 200
 
     except Exception as e:
         logging.error(f"Error fetching all stock data: {e}")
+        return jsonify({"error": "Internal Server Error"}), 500
+
+@app.route('/api/stock-screen', methods=['POST'])
+def screen_stocks():
+    """
+    Advanced screening endpoint that accepts complex filter criteria via POST.
+    Request body: {
+        "filters": {"RSI_14": {"from": 30, "to": 70}, ...},
+        "sort_by": "RSI_14",
+        "sort_order": "desc",
+        "limit": 50
+    }
+    """
+    try:
+        request_data = request.get_json()
+        filters = request_data.get('filters', {})
+        sort_by = request_data.get('sort_by', 'Symbol')
+        sort_order = request_data.get('sort_order', 'asc')
+        limit = request_data.get('limit', None)
+        max_age = request_data.get('max_age', None)
+
+        # Load all stock data
+        stock_data = load_stock_data()
+
+        if not stock_data:
+            logging.warning("No stock data available to filter.")
+            return jsonify({"error": "No stock data available"}), 404
+
+        # Apply filters
+        filtered_data = []
+        for data in stock_data:
+            # Check data age if specified
+            if max_age is not None:
+                data_age = data.get('Data_Age_Days', float('inf'))
+                if data_age > max_age:
+                    continue
+
+            # Apply indicator filters
+            if apply_filters(data, filters):
+                filtered_data.append(data)
+
+        # Sort results
+        if sort_by in filtered_data[0] if filtered_data else {}:
+            reverse = (sort_order.lower() == 'desc')
+            filtered_data.sort(
+                key=lambda x: x.get(sort_by, 0) if x.get(sort_by) is not None else (float('-inf') if reverse else float('inf')),
+                reverse=reverse
+            )
+
+        # Apply limit
+        if limit:
+            filtered_data = filtered_data[:limit]
+
+        logging.info(f"Screened {len(filtered_data)} stocks with POST filters.")
+        return jsonify({
+            "total": len(filtered_data),
+            "results": filtered_data
+        }), 200
+
+    except Exception as e:
+        logging.error(f"Error in stock screening: {e}")
         return jsonify({"error": "Internal Server Error"}), 500
 
 @app.route('/api/stock-data/<string:symbol>', methods=['GET'])

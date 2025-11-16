@@ -1,0 +1,269 @@
+{
+  "indicator_categories": {
+    "momentum": [
+      {
+        "name": "Williams_R_14",
+        "display_name": "Williams %R (14)",
+        "description": "Williams Percent Range - Momentum oscillator",
+        "range": [-100, 0],
+        "overbought": -20,
+        "oversold": -80
+      },
+      {
+        "name": "Williams_R_21",
+        "display_name": "Williams %R (21)",
+        "description": "Williams Percent Range - Momentum oscillator",
+        "range": [-100, 0],
+        "overbought": -20,
+        "oversold": -80
+      },
+      {
+        "name": "RSI_14",
+        "display_name": "RSI (14)",
+        "description": "Relative Strength Index",
+        "range": [0, 100],
+        "overbought": 70,
+        "oversold": 30
+      },
+      {
+        "name": "RSI_21",
+        "display_name": "RSI (21)",
+        "description": "Relative Strength Index",
+        "range": [0, 100],
+        "overbought": 70,
+        "oversold": 30
+      },
+      {
+        "name": "MACD",
+        "display_name": "MACD",
+        "description": "Moving Average Convergence Divergence",
+        "range": null
+      },
+      {
+        "name": "MACD_Hist",
+        "display_name": "MACD Histogram",
+        "description": "MACD Histogram - Difference between MACD and Signal",
+        "range": null
+      },
+      {
+        "name": "Stoch_K",
+        "display_name": "Stochastic %K",
+        "description": "Stochastic Oscillator Fast Line",
+        "range": [0, 100],
+        "overbought": 80,
+        "oversold": 20
+      },
+      {
+        "name": "Stoch_D",
+        "display_name": "Stochastic %D",
+        "description": "Stochastic Oscillator Slow Line",
+        "range": [0, 100],
+        "overbought": 80,
+        "oversold": 20
+      },
+      {
+        "name": "ROC_10",
+        "display_name": "ROC (10)",
+        "description": "Rate of Change",
+        "range": null
+      },
+      {
+        "name": "ROC_20",
+        "display_name": "ROC (20)",
+        "description": "Rate of Change",
+        "range": null
+      },
+      {
+        "name": "CCI_14",
+        "display_name": "CCI (14)",
+        "description": "Commodity Channel Index",
+        "range": null,
+        "overbought": 100,
+        "oversold": -100
+      },
+      {
+        "name": "CCI_20",
+        "display_name": "CCI (20)",
+        "description": "Commodity Channel Index",
+        "range": null,
+        "overbought": 100,
+        "oversold": -100
+      },
+      {
+        "name": "MFI_14",
+        "display_name": "MFI (14)",
+        "description": "Money Flow Index",
+        "range": [0, 100],
+        "overbought": 80,
+        "oversold": 20
+      }
+    ],
+    "trend": [
+      {
+        "name": "ADX_14",
+        "display_name": "ADX (14)",
+        "description": "Average Directional Index - Trend Strength",
+        "range": [0, 100],
+        "strong_trend": 25,
+        "weak_trend": 20
+      },
+      {
+        "name": "Price_vs_SMA20_Pct",
+        "display_name": "Price vs SMA20 %",
+        "description": "Price distance from 20-day SMA",
+        "range": null
+      },
+      {
+        "name": "Price_vs_SMA50_Pct",
+        "display_name": "Price vs SMA50 %",
+        "description": "Price distance from 50-day SMA",
+        "range": null
+      },
+      {
+        "name": "Price_vs_SMA200_Pct",
+        "display_name": "Price vs SMA200 %",
+        "description": "Price distance from 200-day SMA",
+        "range": null
+      }
+    ],
+    "volatility": [
+      {
+        "name": "ATR_Pct",
+        "display_name": "ATR %",
+        "description": "Average True Range as % of price",
+        "range": [0, null]
+      },
+      {
+        "name": "BB_Width",
+        "display_name": "Bollinger Band Width",
+        "description": "Bollinger Band width indicator",
+        "range": [0, null]
+      },
+      {
+        "name": "BB_Position",
+        "display_name": "BB Position",
+        "description": "Price position within Bollinger Bands",
+        "range": [0, 100]
+      },
+      {
+        "name": "Hist_Volatility_20",
+        "display_name": "Historical Volatility (20)",
+        "description": "20-day annualized volatility %",
+        "range": [0, null]
+      }
+    ],
+    "volume": [
+      {
+        "name": "Relative_Volume",
+        "display_name": "Relative Volume",
+        "description": "Volume vs 20-day average",
+        "range": [0, null]
+      },
+      {
+        "name": "ADOSC",
+        "display_name": "Chaikin A/D Oscillator",
+        "description": "Accumulation/Distribution Oscillator",
+        "range": null
+      }
+    ],
+    "price_action": [
+      {
+        "name": "Pct_From_52w_High",
+        "display_name": "% From 52w High",
+        "description": "Distance from 52-week high",
+        "range": [-100, 0]
+      },
+      {
+        "name": "Pct_From_52w_Low",
+        "display_name": "% From 52w Low",
+        "description": "Distance from 52-week low",
+        "range": [0, null]
+      },
+      {
+        "name": "Range_52w_Position",
+        "display_name": "52w Range Position",
+        "description": "Position within 52-week range",
+        "range": [0, 100]
+      }
+    ]
+  },
+  "preset_strategies": {
+    "momentum_breakout": {
+      "name": "Momentum Breakout",
+      "description": "Stocks breaking out with strong momentum",
+      "filters": {
+        "RSI_14": {"from": 55, "to": 75},
+        "ADX_14": {"from": 25, "to": null},
+        "Price_vs_SMA20_Pct": {"from": 0, "to": null},
+        "Relative_Volume": {"from": 1.5, "to": null}
+      }
+    },
+    "oversold_bounce": {
+      "name": "Oversold Bounce",
+      "description": "Oversold stocks with potential for reversal",
+      "filters": {
+        "RSI_14": {"from": 20, "to": 35},
+        "Williams_R_14": {"from": -100, "to": -70},
+        "Price_vs_SMA200_Pct": {"from": -20, "to": 0}
+      }
+    },
+    "overbought_short": {
+      "name": "Overbought Short Candidates",
+      "description": "Overbought stocks with potential for pullback",
+      "filters": {
+        "RSI_14": {"from": 75, "to": 100},
+        "Williams_R_14": {"from": -30, "to": 0},
+        "BB_Position": {"from": 80, "to": 100}
+      }
+    },
+    "strong_uptrend": {
+      "name": "Strong Uptrend",
+      "description": "Stocks in strong uptrend above all major MAs",
+      "filters": {
+        "Price_vs_SMA20_Pct": {"from": 0, "to": null},
+        "Price_vs_SMA50_Pct": {"from": 0, "to": null},
+        "Price_vs_SMA200_Pct": {"from": 0, "to": null},
+        "ADX_14": {"from": 25, "to": null}
+      }
+    },
+    "low_volatility": {
+      "name": "Low Volatility",
+      "description": "Stocks with low volatility for conservative trading",
+      "filters": {
+        "ATR_Pct": {"from": 0, "to": 2},
+        "Hist_Volatility_20": {"from": 0, "to": 20}
+      }
+    },
+    "high_volatility": {
+      "name": "High Volatility",
+      "description": "Stocks with high volatility for active trading",
+      "filters": {
+        "ATR_Pct": {"from": 3, "to": null},
+        "Hist_Volatility_20": {"from": 30, "to": null}
+      }
+    },
+    "volume_surge": {
+      "name": "Volume Surge",
+      "description": "Stocks with unusual volume activity",
+      "filters": {
+        "Relative_Volume": {"from": 2.0, "to": null}
+      }
+    },
+    "near_52w_high": {
+      "name": "Near 52-Week High",
+      "description": "Stocks near their 52-week highs",
+      "filters": {
+        "Pct_From_52w_High": {"from": -5, "to": 0},
+        "RSI_14": {"from": 50, "to": null}
+      }
+    },
+    "bounce_from_52w_low": {
+      "name": "Bounce from 52-Week Low",
+      "description": "Stocks bouncing from 52-week lows",
+      "filters": {
+        "Pct_From_52w_Low": {"from": 0, "to": 20},
+        "RSI_14": {"from": 35, "to": 55}
+      }
+    }
+  }
+}
