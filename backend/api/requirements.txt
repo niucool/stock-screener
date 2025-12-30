@@ -1,0 +1,5 @@
+Flask==3.0.0
+Flask-CORS==4.0.0
+pandas==2.1.4
+TA-Lib==0.4.28
+yfinance==0.2.35

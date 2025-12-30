@@ -39,14 +39,15 @@ def get_sp500_symbols(csv_path='../data/sp500_companies.csv'):
 
 def fetch_and_save_historical(symbol, output_dir='../data/stocks/historical'):
     """
-    Fetches the last 6 months of stock data for a given symbol and saves it as a JSON file.
+    Fetches the last 2 years of stock data for a given symbol and saves it as a JSON file.
+    2 years provides ~500 trading days, ensuring sufficient data for long-period indicators like SMA_200.
     """
     try:
         stock = yf.Ticker(symbol)
-        hist = stock.history(period='6mo', interval='1d')  # Fetch the last 6 months
+        hist = stock.history(period='2y', interval='1d')  # Fetch the last 2 years (~500 trading days)
 
         if hist.empty:
-            logging.warning(f"No historical data found for symbol: {symbol}")
+            logging.error(f"❌ FAILED to fetch data for {symbol}: Yahoo Finance returned no data. Possible causes: delisted stock, API issue, or incorrect system date.")
             return
 
         # Reset index to get 'Date' as a column
@@ -103,12 +104,52 @@ def fetch_stock_data(symbols, output_dir='../data/stocks/historical'):
     except Exception as e:
         logging.error(f"Error during stock data fetching: {e}")
 
+def validate_system_date_check():
+    """Quick system date validation before fetching data."""
+    now = datetime.now()
+    current_year = now.year
+
+    # Check if year is in the future beyond reasonable bounds
+    if current_year > 2025:
+        error_msg = f"❌ CRITICAL: System year ({current_year}) is too far in the future! Yahoo Finance cannot provide data for future dates. Please fix your system date before fetching stock data."
+        logging.error(error_msg)
+        print(error_msg)
+        print(f"Current system date: {now.strftime('%A, %B %d, %Y %H:%M:%S')}")
+        print(f"Expected year range: 2020-2025")
+        return False
+
+    # Check if year is too far in the past
+    if current_year < 2020:
+        error_msg = f"⚠️ WARNING: System year ({current_year}) seems too old. Data might be stale."
+        logging.warning(error_msg)
+        print(error_msg)
+
+    return True
+
 def main():
+    print("=" * 60)
+    print("STOCK DATA FETCH - Starting...")
+    print("=" * 60)
+
+    # Validate system date before proceeding
+    if not validate_system_date_check():
+        print("\n❌ Aborting fetch due to system date issue.")
+        print("To fix: Run 'sudo date MMDDhhmmYYYY' with correct date")
+        print("Example: sudo date 111820052024  # Nov 18, 2024 at 20:05")
+        import sys
+        sys.exit(1)
+
     symbols = get_sp500_symbols()
     if symbols:
+        print(f"\nFetching data for {len(symbols)} symbols...")
+        print("This will take approximately 5-10 minutes.\n")
         fetch_stock_data(symbols)
+        print("\n" + "=" * 60)
+        print("✓ Fetch completed successfully!")
+        print("=" * 60)
     else:
         logging.error("No symbols to fetch.")
+        print("❌ Error: No symbols found in S&P 500 companies list.")
 
 if __name__ == "__main__":
     main()

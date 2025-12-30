@@ -6,7 +6,8 @@ import {
   GridToolbarContainer,
   GridToolbarExport,
 } from '@mui/x-data-grid';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Alert, AlertTitle } from '@mui/material';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import StockDetailDialog from './StockDetailDialog'; // Ensure this path is correct
 
 const StockTable = ({ data }) => {
@@ -89,6 +90,42 @@ const StockTable = ({ data }) => {
   // Debugging: Log the mapped rows
   console.log('Mapped Rows:', rows);
 
+  // Check data age - show warning if data is stale
+  const getDataAgeWarning = () => {
+    if (rows.length === 0 || !data[0]) return null;
+
+    const firstStock = data[0];
+    const dataDate = firstStock.Date ? new Date(firstStock.Date) : null;
+    const dataAgeDays = firstStock.Data_Age_Days;
+
+    if (!dataDate) return null;
+
+    // Show warning if data is older than 3 days
+    if (dataAgeDays > 3) {
+      const severity = dataAgeDays > 30 ? 'error' : 'warning';
+
+      return (
+        <Alert
+          severity={severity}
+          icon={<WarningAmberIcon />}
+          sx={{ mb: 2 }}
+        >
+          <AlertTitle>
+            {dataAgeDays > 30 ? 'Critical: Data is Very Stale' : 'Warning: Data May Be Outdated'}
+          </AlertTitle>
+          Stock data is <strong>{dataAgeDays} days old</strong> (last updated: <strong>{firstStock.Date}</strong>).
+          {dataAgeDays > 100 && (
+            <> This likely indicates a <strong>system date issue</strong>.
+            Please verify your system clock is set correctly before refreshing data.</>
+          )}
+          {' '}Click the <strong>"Refresh Data"</strong> button in the header to update with the latest market data.
+        </Alert>
+      );
+    }
+
+    return null;
+  };
+
   // Custom toolbar with export functionality
   const CustomToolbar = () => (
     <GridToolbarContainer>
@@ -109,24 +146,30 @@ const StockTable = ({ data }) => {
   };
 
   return (
-    <Box sx={{ height: 600, width: '100%' }}>
-      {rows.length > 0 ? (
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={25}
-          rowsPerPageOptions={[25, 50, 100]}
-          components={{
-            Toolbar: CustomToolbar,
-          }}
-          disableSelectionOnClick
-          onRowClick={handleRowClick}
-        />
-      ) : (
-        <Typography variant="h6" align="center" sx={{ mt: 4 }}>
-          No data available.
-        </Typography>
-      )}
+    <Box sx={{ width: '100%' }}>
+      {/* Data age warning */}
+      {getDataAgeWarning()}
+
+      <Box sx={{ height: 600, width: '100%' }}>
+        {rows.length > 0 ? (
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={25}
+            rowsPerPageOptions={[25, 50, 100]}
+            components={{
+              Toolbar: CustomToolbar,
+            }}
+            disableSelectionOnClick
+            onRowClick={handleRowClick}
+          />
+        ) : (
+          <Typography variant="h6" align="center" sx={{ mt: 4 }}>
+            No data available.
+          </Typography>
+        )}
+      </Box>
+
       {/* Detail Dialog */}
       <StockDetailDialog
         open={dialogOpen}

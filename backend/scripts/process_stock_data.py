@@ -77,7 +77,7 @@ def calculate_indicators(symbol, historical_data, output_dir='../data/stocks/pro
         df.dropna(subset=['Close', 'High', 'Low', 'Open', 'Volume'], inplace=True)
 
         if df.empty or len(df) < 200:  # Need sufficient data for long-period indicators
-            logging.warning(f"Insufficient valid data available for {symbol} after cleaning.")
+            logging.error(f"❌ Insufficient data for {symbol}: Only {len(df)} data points available (need 200+). This stock will be skipped.")
             return
 
         # ==================== MOMENTUM INDICATORS ====================
@@ -326,11 +326,22 @@ def process_all_symbols(symbols, input_dir='../data/stocks/historical', output_d
         logging.error(f"Error during processing all symbols: {e}")
 
 def main():
+    print("=" * 60)
+    print("STOCK DATA PROCESSING - Starting...")
+    print("=" * 60)
+
     symbols = get_sp500_symbols()
     if symbols:
+        print(f"\nProcessing {len(symbols)} symbols...")
+        print("Calculating 50+ technical indicators per stock...")
+        print("This will take approximately 5-10 minutes.\n")
         process_all_symbols(symbols)
+        print("\n" + "=" * 60)
+        print("✓ Processing completed successfully!")
+        print("=" * 60)
     else:
         logging.error("No symbols to process.")
+        print("❌ Error: No symbols found in S&P 500 companies list.")
 
 if __name__ == "__main__":
     main()

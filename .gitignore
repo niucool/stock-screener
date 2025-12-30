@@ -4,7 +4,6 @@
 /.pnp
 .pnp.js
 
-
 # misc
 .DS_Store
 .vscode
@@ -12,4 +11,35 @@
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Documentation (internal notes)
+docs/
+CLAUDE.md
+
+# Claude Code artifacts
+.claude/
+claude-*.md
+
+# Backend data and logs
+backend/data/stocks.db
+backend/data/stocks/historical/
+backend/data/stocks/processed/
+backend/logs/
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 

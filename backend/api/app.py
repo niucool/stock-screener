@@ -1,11 +1,13 @@
-# backend/api/app.py
+# backend/api/app_sqlite.py
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
 import json
 import pandas as pd
+import sqlite3
 import logging
+from job_manager import job_manager
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -18,15 +20,119 @@ logging.basicConfig(
 )
 
 DATA_DIR = '../data'
-PROCESSED_DIR = os.path.join(DATA_DIR, 'stocks', 'processed')
+DB_PATH = os.path.join(DATA_DIR, 'stocks.db')
 SP500_CSV = os.path.join(DATA_DIR, 'sp500_companies.csv')
 CONFIG_DIR = '../config'
 INDICATORS_CONFIG = os.path.join(CONFIG_DIR, 'indicators_config.json')
 
+# Field mapping: database column names to JSON field names (for backward compatibility)
+FIELD_MAP = {
+    'symbol': 'Symbol',
+    'date': 'Date',
+    'open': 'Open',
+    'high': 'High',
+    'low': 'Low',
+    'close': 'Close',
+    'volume': 'Volume',
+    'data_age_days': 'Data_Age_Days',
+    'williams_r_14': 'Williams_R_14',
+    'williams_r_21': 'Williams_R_21',
+    'ema_13_williams_r': 'EMA_13_Williams_R',
+    'rsi_14': 'RSI_14',
+    'rsi_21': 'RSI_21',
+    'macd': 'MACD',
+    'macd_signal': 'MACD_Signal',
+    'macd_hist': 'MACD_Hist',
+    'stoch_k': 'Stoch_K',
+    'stoch_d': 'Stoch_D',
+    'roc_10': 'ROC_10',
+    'roc_20': 'ROC_20',
+    'cci_14': 'CCI_14',
+    'cci_20': 'CCI_20',
+    'mfi_14': 'MFI_14',
+    'ema_9': 'EMA_9',
+    'ema_20': 'EMA_20',
+    'ema_50': 'EMA_50',
+    'ema_200': 'EMA_200',
+    'sma_20': 'SMA_20',
+    'sma_50': 'SMA_50',
+    'sma_200': 'SMA_200',
+    'adx_14': 'ADX_14',
+    'plus_di': 'Plus_DI',
+    'minus_di': 'Minus_DI',
+    'sar': 'SAR',
+    'atr_14': 'ATR_14',
+    'atr_20': 'ATR_20',
+    'bb_upper': 'BB_Upper',
+    'bb_middle': 'BB_Middle',
+    'bb_lower': 'BB_Lower',
+    'stddev_20': 'StdDev_20',
+    'bb_width': 'BB_Width',
+    'atr_pct': 'ATR_Pct',
+    'hist_volatility_20': 'Hist_Volatility_20',
+    'obv': 'OBV',
+    'ad': 'AD',
+    'adosc': 'ADOSC',
+    'volume_ma_20': 'Volume_MA_20',
+    'volume_ma_50': 'Volume_MA_50',
+    'relative_volume': 'Relative_Volume',
+    'price_vs_sma20_pct': 'Price_vs_SMA20_Pct',
+    'price_vs_sma50_pct': 'Price_vs_SMA50_Pct',
+    'price_vs_sma200_pct': 'Price_vs_SMA200_Pct',
+    'bb_position': 'BB_Position',
+    'high_52w': 'High_52w',
+    'low_52w': 'Low_52w',
+    'pct_from_52w_high': 'Pct_From_52w_High',
+    'pct_from_52w_low': 'Pct_From_52w_Low',
+    'range_52w_position': 'Range_52w_Position'
+}
+
+# Reverse mapping for query building
+JSON_TO_DB_MAP = {v: k for k, v in FIELD_MAP.items()}
+
+def get_db_connection():
+    """Get SQLite database connection with proper row factory."""
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    # Ensure text is returned as str, not bytes
+    conn.text_factory = str
+    return conn
+
+def row_to_dict(row):
+    """Convert SQLite row to dictionary with proper field names and JSON-safe values."""
+    if row is None:
+        return None
+
+    result = {}
+    for key in row.keys():
+        db_field = key
+        json_field = FIELD_MAP.get(db_field, db_field)
+        value = row[db_field]
+
+        # Convert bytes to string (with error handling)
+        if isinstance(value, bytes):
+            try:
+                value = value.decode('utf-8')
+            except UnicodeDecodeError:
+                # Try Windows-1252 encoding as fallback
+                try:
+                    value = value.decode('cp1252')
+                except:
+                    # Last resort: replace invalid characters
+                    value = value.decode('utf-8', errors='replace')
+
+        # Convert memoryview to bytes first, then to appropriate type
+        if isinstance(value, memoryview):
+            value = bytes(value)
+
+        # Store value with proper type
+        result[json_field] = value
+
+    return result
+
 def load_sp500_companies():
     try:
         df = pd.read_csv(SP500_CSV)
-        symbols = df['Symbol'].tolist()
         companies = df.to_dict(orient='records')
         logging.info("Loaded S&P 500 companies.")
         return companies
@@ -34,34 +140,77 @@ def load_sp500_companies():
         logging.error(f"Error loading S&P 500 companies: {e}")
         return []
 
-def load_stock_data(symbol=None):
+def load_stock_data_from_db(symbol=None, filters=None, max_age=None, sort_by=None, sort_order='asc', limit=None):
     """
-    Load stock data. If symbol is provided, load data for that symbol.
-    Otherwise, load all stock data.
-    """
-    if symbol:
-        file_path = os.path.join(PROCESSED_DIR, f"{symbol}.json")
-        if not os.path.exists(file_path):
-            logging.warning(f"Data file for symbol {symbol} not found.")
-            return None
-        try:
-            with open(file_path, 'r') as f:
-                data = json.load(f)
-            return data
-        except Exception as e:
-            logging.error(f"Error loading data for symbol {symbol}: {e}")
-            return None
-    else:
-        # Load all stock data
-        stock_data = []
-        for filename in os.listdir(PROCESSED_DIR):
-            if filename.endswith('.json'):
-                symbol = filename.replace('.json', '')
-                data = load_stock_data(symbol)
-                if data:
-                    stock_data.append(data)
-        return stock_data
+    Load stock data from SQLite database with optional filtering.
 
+    Args:
+        symbol: Optional specific symbol to fetch
+        filters: Dict of indicator filters {'RSI_14': {'from': 30, 'to': 70}}
+        max_age: Maximum data age in days
+        sort_by: Field to sort by
+        sort_order: 'asc' or 'desc'
+        limit: Maximum number of results
+    """
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Build query
+        query = "SELECT * FROM stock_indicators WHERE 1=1"
+        params = []
+
+        # Symbol filter
+        if symbol:
+            query += " AND symbol = ?"
+            params.append(symbol.upper())
+
+        # Data age filter
+        if max_age is not None:
+            query += " AND data_age_days <= ?"
+            params.append(max_age)
+
+        # Indicator filters
+        if filters:
+            for indicator, bounds in filters.items():
+                # Convert JSON field name to database column name
+                db_field = JSON_TO_DB_MAP.get(indicator, indicator.lower())
+
+                from_val = bounds.get('from')
+                to_val = bounds.get('to')
+
+                if from_val is not None:
+                    query += f" AND {db_field} >= ?"
+                    params.append(from_val)
+
+                if to_val is not None:
+                    query += f" AND {db_field} <= ?"
+                    params.append(to_val)
+
+        # Sorting
+        if sort_by:
+            db_sort_field = JSON_TO_DB_MAP.get(sort_by, sort_by.lower())
+            order = 'DESC' if sort_order.lower() == 'desc' else 'ASC'
+            query += f" ORDER BY {db_sort_field} {order}"
+        else:
+            query += " ORDER BY symbol ASC"
+
+        # Limit
+        if limit:
+            query += f" LIMIT {int(limit)}"
+
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+
+        # Convert to dicts
+        results = [row_to_dict(row) for row in rows]
+
+        conn.close()
+        return results
+
+    except Exception as e:
+        logging.error(f"Error loading stock data from DB: {e}")
+        return []
 
 def load_indicators_config():
     """Load indicators configuration from JSON file"""
@@ -73,29 +222,6 @@ def load_indicators_config():
     except Exception as e:
         logging.error(f"Error loading indicators configuration: {e}")
         return None
-
-def apply_filters(data, filters):
-    """
-    Generic filter application function that works with any indicator.
-    Filters format: {'indicator_name': {'from': value, 'to': value}}
-    """
-    for indicator, bounds in filters.items():
-        if indicator not in data:
-            continue
-
-        value = data[indicator]
-        if value is None:
-            return False
-
-        from_val = bounds.get('from')
-        to_val = bounds.get('to')
-
-        if from_val is not None and value < from_val:
-            return False
-        if to_val is not None and value > to_val:
-            return False
-
-    return True
 
 @app.route('/api/config/indicators', methods=['GET'])
 def get_indicators_config():
@@ -161,31 +287,15 @@ def get_all_stock_data():
         # Data age filter (optional)
         max_age = request.args.get('max_age', type=int)
 
-        # Load all stock data
-        stock_data = load_stock_data()
+        # Load filtered stock data from database
+        stock_data = load_stock_data_from_db(filters=filters, max_age=max_age)
 
         if not stock_data:
-            logging.warning("No stock data available to filter.")
-            return jsonify({"error": "No stock data available"}), 404
+            logging.warning("No stock data available matching filters.")
+            return jsonify([]), 200  # Return empty array, not error
 
-        # Apply filters
-        filtered_data = []
-        for data in stock_data:
-            # Check data age if specified
-            if max_age is not None:
-                data_age = data.get('Data_Age_Days', float('inf'))
-                if data_age > max_age:
-                    continue
-
-            # Apply indicator filters
-            if apply_filters(data, filters):
-                filtered_data.append(data)
-
-        # Sort by symbol
-        filtered_data.sort(key=lambda x: x.get('Symbol', ''))
-
-        logging.info(f"Served {len(filtered_data)} filtered stock data entries out of {len(stock_data)} total.")
-        return jsonify(filtered_data), 200
+        logging.info(f"Served {len(stock_data)} filtered stock data entries.")
+        return jsonify(stock_data), 200
 
     except Exception as e:
         logging.error(f"Error fetching all stock data: {e}")
@@ -210,42 +320,19 @@ def screen_stocks():
         limit = request_data.get('limit', None)
         max_age = request_data.get('max_age', None)
 
-        # Load all stock data
-        stock_data = load_stock_data()
+        # Load filtered and sorted stock data from database
+        stock_data = load_stock_data_from_db(
+            filters=filters,
+            max_age=max_age,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            limit=limit
+        )
 
-        if not stock_data:
-            logging.warning("No stock data available to filter.")
-            return jsonify({"error": "No stock data available"}), 404
-
-        # Apply filters
-        filtered_data = []
-        for data in stock_data:
-            # Check data age if specified
-            if max_age is not None:
-                data_age = data.get('Data_Age_Days', float('inf'))
-                if data_age > max_age:
-                    continue
-
-            # Apply indicator filters
-            if apply_filters(data, filters):
-                filtered_data.append(data)
-
-        # Sort results
-        if sort_by in filtered_data[0] if filtered_data else {}:
-            reverse = (sort_order.lower() == 'desc')
-            filtered_data.sort(
-                key=lambda x: x.get(sort_by, 0) if x.get(sort_by) is not None else (float('-inf') if reverse else float('inf')),
-                reverse=reverse
-            )
-
-        # Apply limit
-        if limit:
-            filtered_data = filtered_data[:limit]
-
-        logging.info(f"Screened {len(filtered_data)} stocks with POST filters.")
+        logging.info(f"Screened {len(stock_data)} stocks with POST filters.")
         return jsonify({
-            "total": len(filtered_data),
-            "results": filtered_data
+            "total": len(stock_data),
+            "results": stock_data
         }), 200
 
     except Exception as e:
@@ -255,14 +342,68 @@ def screen_stocks():
 @app.route('/api/stock-data/<string:symbol>', methods=['GET'])
 def get_stock_data(symbol):
     try:
-        data = load_stock_data(symbol.upper())
-        if data:
-            return jsonify(data), 200
+        data = load_stock_data_from_db(symbol=symbol.upper())
+        if data and len(data) > 0:
+            return jsonify(data[0]), 200
         else:
             return jsonify({"error": "Symbol not found"}), 404
     except Exception as e:
         logging.error(f"Error fetching data for {symbol}: {e}")
         return jsonify({"error": "Internal Server Error"}), 500
 
+# ==================== DATA REFRESH ENDPOINTS ====================
+
+@app.route('/api/refresh-data', methods=['POST'])
+def trigger_data_refresh():
+    """
+    Trigger a background data refresh job.
+    Uses incremental fetch from NASDAQ API and recalculates indicators.
+    """
+    try:
+        result = job_manager.start_refresh()
+        status_code = 200 if result['success'] else 409  # 409 Conflict if already running
+        return jsonify(result), status_code
+    except Exception as e:
+        logging.error(f"Error triggering data refresh: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error: {str(e)}'
+        }), 500
+
+@app.route('/api/refresh-status', methods=['GET'])
+def get_refresh_status():
+    """
+    Get current status of the data refresh job.
+    Returns job state, progress, timestamps, and any errors.
+    """
+    try:
+        status = job_manager.get_status()
+        return jsonify(status), 200
+    except Exception as e:
+        logging.error(f"Error getting refresh status: {e}")
+        return jsonify({
+            'status': 'error',
+            'error': str(e)
+        }), 500
+
+@app.route('/api/refresh-reset', methods=['POST'])
+def reset_refresh_status():
+    """
+    Reset the job status to idle (clears completed/failed states).
+    Cannot reset while a job is running.
+    """
+    try:
+        result = job_manager.reset_to_idle()
+        status_code = 200 if result['success'] else 409
+        return jsonify(result), status_code
+    except Exception as e:
+        logging.error(f"Error resetting refresh status: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error: {str(e)}'
+        }), 500
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    # Enable threading to allow background jobs while serving requests
+    # Disable reloader to prevent thread issues with werkzeug
+    app.run(host='0.0.0.0', port=5001, debug=True, threaded=True, use_reloader=False)

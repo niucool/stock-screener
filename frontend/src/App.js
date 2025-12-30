@@ -1,6 +1,6 @@
 // src/App.js
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, CircularProgress, Box, Typography } from '@mui/material';
 import Header from './components/Header';
 import Filters from './components/Filters';
@@ -17,6 +17,7 @@ function App() {
   const [stockData, setStockData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const getStockData = async () => {
     setLoading(true);
@@ -33,14 +34,20 @@ function App() {
     }
   };
 
+  // Callback for DataRefreshButton to trigger data reload
+  const handleDataRefreshed = useCallback(() => {
+    console.log('Data refresh completed - reloading stock data');
+    setRefreshTrigger(prev => prev + 1);
+  }, []);
+
   useEffect(() => {
     getStockData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters]);
+  }, [filters, refreshTrigger]);
 
   return (
     <div>
-      <Header />
+      <Header onDataRefreshed={handleDataRefreshed} />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Filters filters={filters} setFilters={setFilters} />
         {loading ? (
