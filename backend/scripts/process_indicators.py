@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Process Stock Indicators from SQLite Database
 Calculates 50+ technical indicators and stores in stock_indicators table.

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Stock Screener Database Initialization Script
 Creates SQLite database schema for efficient stock data storage and incremental updates.

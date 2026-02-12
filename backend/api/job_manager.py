@@ -127,7 +127,7 @@ class DataRefreshJobManager:
             self._update_progress('fetching', 'Fetching new stock data from NASDAQ API (incremental)...')
 
             fetch_result = subprocess.run(
-                ['python3', 'incremental_fetch.py'],
+                ['python', 'incremental_fetch.py'],
                 cwd=scripts_dir,
                 capture_output=True,
                 text=True,
@@ -144,7 +144,7 @@ class DataRefreshJobManager:
             self._update_progress('processing', 'Processing data and calculating technical indicators...')
 
             process_result = subprocess.run(
-                ['python3', 'process_indicators.py'],
+                ['python', 'process_indicators.py'],
                 cwd=scripts_dir,
                 capture_output=True,
                 text=True,

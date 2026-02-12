@@ -28,7 +28,7 @@ trap cleanup EXIT INT TERM
 
 # Start Backend Server in background
 cd "$SCRIPT_DIR/backend/api"
-python3 app.py &
+python app.py &
 
 # Start Frontend Server in background
 cd "$SCRIPT_DIR/frontend"

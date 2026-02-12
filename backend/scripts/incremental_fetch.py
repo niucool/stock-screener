@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Incremental Stock Data Fetcher
 Only fetches new data since the last update, making daily updates fast and efficient.

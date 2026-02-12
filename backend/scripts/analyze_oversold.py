@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Oversold Stock Analysis with Risk Assessment
 Categorizes oversold stocks into risk levels based on multiple technical indicators.

@@ -112,7 +112,7 @@ stock-screener/
 2. **Create and Activate a Virtual Environment (Optional):**
 
    ```bash
-   python3 -m venv venv
+   python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 

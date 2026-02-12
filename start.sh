@@ -29,7 +29,7 @@ trap cleanup EXIT INT TERM
 # Start Backend Server
 echo "📡 Starting Flask backend server (port 5001)..."
 cd "$SCRIPT_DIR/backend/api"
-FLASK_ENV=development python3 app.py > "$SCRIPT_DIR/logs/backend-console.log" 2>&1 &
+FLASK_ENV=development python app.py > "$SCRIPT_DIR/logs/backend-console.log" 2>&1 &
 BACKEND_PID=$!
 echo "  ✓ Backend PID: $BACKEND_PID"
 sleep 3
