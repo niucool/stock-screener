@@ -1,0 +1,60 @@
+ENHANCED STOCK SCREENER RESULTS
+==================================================
+Date: 2026-02-12 21:40
+
+WORKFLOW COMPLETE:
+1. Market data updated (1 day fresh)
+2. Combined screening executed
+3. Top 10 oversold stocks found
+
+SCREENING CRITERIA:
+- Williams %R < -80 (oversold)
+- Buffett Score >= 5/10 (quality)
+- Combined: 30% technical + 70% fundamental
+
+TOP 5 QUALITY OVERSOLD STOCKS:
+
+1. INCY - $98.84
+   INCYTE CORPORATION
+   Buffett: 10/10 | Score: 92/100
+   Williams %R: -87.0 | RSI: 43.1
+   vs 200-day SMA: +16.1%
+
+2. TROW - $93.79
+   PRICE T ROWE GROUP INC
+   Buffett: 9/10 | Score: 86/100
+   Williams %R: -87.3 | RSI: 34.5
+   vs 200-day SMA: -7.9%
+
+3. PLTR - $135.68
+   Palantir Technologies Inc.
+   Buffett: 9/10 | Score: 86/100
+   Williams %R: -86.4 | RSI: 34.4
+   vs 200-day SMA: -15.5%
+
+4. A - $128.90
+   Agilent Technologies
+   Buffett: 9/10 | Score: 86/100
+   Williams %R: -86.8 | RSI: 34.7
+   vs 200-day SMA: +0.1%
+
+5. LULU - $175.86
+   lululemon athletica inc.
+   Buffett: 9/10 | Score: 86/100
+   Williams %R: -85.9 | RSI: 41.7
+   vs 200-day SMA: -16.6%
+
+ANALYSIS:
+- INCY: Perfect Buffett score (10/10) - exceptional quality
+- TROW: Strong fundamentals, technically oversold
+- PLTR: High-growth tech with quality metrics
+- A: Agilent - stable business, good value
+- LULU: Premium brand, Buffett-approved quality
+
+NEXT STEPS:
+- Review detailed analysis in saved JSON file
+- Set up automated daily screening
+- Monitor these stocks for potential entry points
+
+System: Enhanced Stock Screener v1.0
+Data: Yahoo Finance + SEC EDGAR API

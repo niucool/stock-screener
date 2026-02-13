@@ -1,0 +1,1315 @@
+{
+  "timestamp": "2026-02-12T21:36:54.084206",
+  "criteria": {
+    "technical_threshold": -80.0,
+    "min_buffett_score": 5
+  },
+  "summary": {
+    "total_stocks_screened": 10
+  },
+  "stocks": [
+    {
+      "ticker": "INCY",
+      "company_name": "INCYTE CORPORATION",
+      "close_price": 98.84,
+      "technical_indicators": {
+        "williams_r_21": -86.99918233851184,
+        "rsi_14": 43.06499927798275,
+        "rsi_21": 45.82662392718217,
+        "ema_williams_r": -61.40727014212703,
+        "adx_14": 15.087179176178552,
+        "price_vs_sma200_pct": 16.0839518105967,
+        "pct_from_52w_high": -11.977914328969634,
+        "pct_from_52w_low": 84.54070201643017,
+        "bb_position": 8.566414275124002,
+        "relative_volume": 0.9750962140048045,
+        "macd_hist": -0.29005802228730604,
+        "hist_volatility": 44.56287156069849
+      },
+      "fundamental_analysis": {
+        "buffett_score": 10,
+        "total_formulas": 10,
+        "score_percentage": 100.0,
+        "formula_results": [
+          {
+            "name": "Cash Test",
+            "description": "Cash + Short-Term Investments > Total Debt",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.0,
+            "details": "Cash/Investments: $3,097,817,000, Debt: $0, Ratio: infx"
+          },
+          {
+            "name": "Debt-to-Equity",
+            "description": "Total Liabilities / Equity < 0.5",
+            "status": "PASS",
+            "value": 0.3464930087752672,
+            "target": 0.5,
+            "details": "Liabilities: $1,790,495,000, Equity: $5,167,478,000, Ratio: 0.35"
+          },
+          {
+            "name": "Free Cash Flow to Debt",
+            "description": "Free Cash Flow / Total Debt > 0.25",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 0.25,
+            "details": "FCF: $0, Debt: $0, Ratio: inf"
+          },
+          {
+            "name": "Return on Equity",
+            "description": "Net Income / Equity > 15%",
+            "status": "PASS",
+            "value": 24.898993280668055,
+            "target": 15.0,
+            "details": "Net Income: $1,286,650,000, Equity: $5,167,478,000, ROE: 24.9%"
+          },
+          {
+            "name": "Current Ratio",
+            "description": "Current Assets / Current Liabilities > 1.5",
+            "status": "PASS",
+            "value": 3.31573486803461,
+            "target": 1.5,
+            "details": "Current Assets: $5,023,902,000, Current Liabilities: $1,515,170,000, Ratio: 3.32x"
+          },
+          {
+            "name": "Operating Margin",
+            "description": "Operating Profit / Revenue > 12%",
+            "status": "PASS",
+            "value": 29.464845265015732,
+            "target": 12.0,
+            "details": "Operating Income: $1,514,859,000, Revenue: $5,141,242,000, Margin: 29.5%"
+          },
+          {
+            "name": "Asset Turnover",
+            "description": "Revenue / Total Assets > 0.5",
+            "status": "PASS",
+            "value": 0.7388993892330424,
+            "target": 0.5,
+            "details": "Revenue: $5,141,242,000, Assets: $6,957,973,000, Turnover: 0.74x"
+          },
+          {
+            "name": "Interest Coverage",
+            "description": "Operating Profit / Interest Expense > 3\u00d7",
+            "status": "PASS",
+            "value": 3522.927906976744,
+            "target": 3.0,
+            "details": "Operating Income: $1,514,859,000, Interest Expense: $430,000, Coverage: 3522.9x"
+          },
+          {
+            "name": "Earnings Stability",
+            "description": "Positive earnings (current year)",
+            "status": "PASS",
+            "value": 1.0,
+            "target": 1.0,
+            "details": "Current Net Income: $1,286,650,000 (Positive)"
+          },
+          {
+            "name": "Capital Allocation",
+            "description": "ROE > 15% (value creation)",
+            "status": "PASS",
+            "value": 24.898993280668055,
+            "target": 15.0,
+            "details": "ROE: 24.9% - Management creates value"
+          }
+        ],
+        "key_financials": {
+          "Assets": 6957973000,
+          "CurrentAssets": 5023902000,
+          "Liabilities": 1790495000,
+          "CurrentLiabilities": 1515170000,
+          "LongTermDebt": 19094000000,
+          "Equity": 5167478000,
+          "CashAndEquivalents": 3097817000,
+          "Revenue": 5141242000,
+          "OperatingIncome": 1514859000,
+          "NetIncome": 1286650000,
+          "InterestExpense": 430000,
+          "OperatingCashFlow": 1413498000,
+          "CapitalExpenditures": 48700000,
+          "SharesOutstanding": 199014486
+        }
+      },
+      "scores": {
+        "technical": 75.00408830744078,
+        "fundamental": 100.0,
+        "combined": 92.50122649223223
+      },
+      "data_freshness": {
+        "price_data_age_days": 1,
+        "analysis_timestamp": "2026-02-12T21:36:38.809542"
+      }
+    },
+    {
+      "ticker": "TROW",
+      "company_name": "PRICE T ROWE GROUP INC",
+      "close_price": 93.79,
+      "technical_indicators": {
+        "williams_r_21": -87.31026108075287,
+        "rsi_14": 34.4799364732603,
+        "rsi_21": 37.59002820763075,
+        "ema_williams_r": -69.37919020561823,
+        "adx_14": 24.338435538705834,
+        "price_vs_sma200_pct": -7.873482463890815,
+        "pct_from_52w_high": -20.664862121468442,
+        "pct_from_52w_low": 20.47527296082211,
+        "bb_position": 7.440336876591604,
+        "relative_volume": 1.0446119662998297,
+        "macd_hist": -1.1905191681970293,
+        "hist_volatility": 38.391836418199325
+      },
+      "fundamental_analysis": {
+        "buffett_score": 9,
+        "total_formulas": 10,
+        "score_percentage": 90.0,
+        "formula_results": [
+          {
+            "name": "Cash Test",
+            "description": "Cash + Short-Term Investments > Total Debt",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.0,
+            "details": "Cash/Investments: $3,634,800,000, Debt: $0, Ratio: infx"
+          },
+          {
+            "name": "Debt-to-Equity",
+            "description": "Total Liabilities / Equity < 0.5",
+            "status": "PASS",
+            "value": 0.25530537704008505,
+            "target": 0.5,
+            "details": "Liabilities: $2,761,000,000, Equity: $10,814,500,000, Ratio: 0.26"
+          },
+          {
+            "name": "Free Cash Flow to Debt",
+            "description": "Free Cash Flow / Total Debt > 0.25",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 0.25,
+            "details": "FCF: $0, Debt: $0, Ratio: inf"
+          },
+          {
+            "name": "Return on Equity",
+            "description": "Net Income / Equity > 15%",
+            "status": "PASS",
+            "value": 15.181469323593324,
+            "target": 15.0,
+            "details": "Net Income: $1,641,800,000, Equity: $10,814,500,000, ROE: 15.2%"
+          },
+          {
+            "name": "Current Ratio",
+            "description": "Current Assets / Current Liabilities > 1.5",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.5,
+            "details": "Current Assets: $0, Current Liabilities: $0, Ratio: infx"
+          },
+          {
+            "name": "Operating Margin",
+            "description": "Operating Profit / Revenue > 12%",
+            "status": "PASS",
+            "value": 31.925214191462075,
+            "target": 12.0,
+            "details": "Operating Income: $1,717,800,000, Revenue: $5,380,700,000, Margin: 31.9%"
+          },
+          {
+            "name": "Asset Turnover",
+            "description": "Revenue / Total Assets > 0.5",
+            "status": "FAIL",
+            "value": 0.36527860750556673,
+            "target": 0.5,
+            "details": "Revenue: $5,380,700,000, Assets: $14,730,400,000, Turnover: 0.37x"
+          },
+          {
+            "name": "Interest Coverage",
+            "description": "Operating Profit / Interest Expense > 3\u00d7",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 3.0,
+            "details": "Operating Income: $1,717,800,000, Interest Expense: $0, Coverage: infx"
+          },
+          {
+            "name": "Earnings Stability",
+            "description": "Positive earnings (current year)",
+            "status": "PASS",
+            "value": 1.0,
+            "target": 1.0,
+            "details": "Current Net Income: $1,641,800,000 (Positive)"
+          },
+          {
+            "name": "Capital Allocation",
+            "description": "ROE > 15% (value creation)",
+            "status": "PASS",
+            "value": 15.181469323593324,
+            "target": 15.0,
+            "details": "ROE: 15.2% - Management creates value"
+          }
+        ],
+        "key_financials": {
+          "Assets": 14730400000,
+          "Liabilities": 2761000000,
+          "Equity": 10814500000,
+          "CashAndEquivalents": 3634800000,
+          "Revenue": 5380700000,
+          "OperatingIncome": 1717800000,
+          "NetIncome": 1641800000,
+          "OperatingCashFlow": 1772100000,
+          "CapitalExpenditures": 207500000,
+          "SharesOutstanding": 218237000
+        }
+      },
+      "scores": {
+        "technical": 78.44869459623567,
+        "fundamental": 90.0,
+        "combined": 86.5346083788707
+      },
+      "data_freshness": {
+        "price_data_age_days": 1,
+        "analysis_timestamp": "2026-02-12T21:36:38.099762"
+      }
+    },
+    {
+      "ticker": "PLTR",
+      "company_name": "Palantir Technologies Inc.",
+      "close_price": 135.68,
+      "technical_indicators": {
+        "williams_r_21": -86.39807798928108,
+        "rsi_14": 34.36907863972287,
+        "rsi_21": 36.220923700138854,
+        "ema_williams_r": -83.78699600125707,
+        "adx_14": 30.004942149667638,
+        "price_vs_sma200_pct": -15.522716422840343,
+        "pct_from_52w_high": -34.6183500385505,
+        "pct_from_52w_low": 105.20266182698124,
+        "bb_position": 15.893763197565223,
+        "relative_volume": 0.9675976244800721,
+        "macd_hist": -1.627072764464284,
+        "hist_volatility": 66.33379744649037
+      },
+      "fundamental_analysis": {
+        "buffett_score": 9,
+        "total_formulas": 10,
+        "score_percentage": 90.0,
+        "formula_results": [
+          {
+            "name": "Cash Test",
+            "description": "Cash + Short-Term Investments > Total Debt",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.0,
+            "details": "Cash/Investments: $1,615,967,000, Debt: $0, Ratio: infx"
+          },
+          {
+            "name": "Debt-to-Equity",
+            "description": "Total Liabilities / Equity < 0.5",
+            "status": "PASS",
+            "value": 0.216326576442271,
+            "target": 0.5,
+            "details": "Liabilities: $1,425,691,000, Equity: $6,590,457,000, Ratio: 0.22"
+          },
+          {
+            "name": "Free Cash Flow to Debt",
+            "description": "Free Cash Flow / Total Debt > 0.25",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 0.25,
+            "details": "FCF: $0, Debt: $0, Ratio: inf"
+          },
+          {
+            "name": "Return on Equity",
+            "description": "Net Income / Equity > 15%",
+            "status": "PASS",
+            "value": 15.421646784130447,
+            "target": 15.0,
+            "details": "Net Income: $1,016,357,000, Equity: $6,590,457,000, ROE: 15.4%"
+          },
+          {
+            "name": "Current Ratio",
+            "description": "Current Assets / Current Liabilities > 1.5",
+            "status": "PASS",
+            "value": 6.426750863899872,
+            "target": 1.5,
+            "details": "Current Assets: $7,586,156,000, Current Liabilities: $1,180,403,000, Ratio: 6.43x"
+          },
+          {
+            "name": "Operating Margin",
+            "description": "Operating Profit / Revenue > 12%",
+            "status": "PASS",
+            "value": 27.328715875807035,
+            "target": 12.0,
+            "details": "Operating Income: $838,621,000, Revenue: $3,068,644,000, Margin: 27.3%"
+          },
+          {
+            "name": "Asset Turnover",
+            "description": "Revenue / Total Assets > 0.5",
+            "status": "FAIL",
+            "value": 0.37819313873866767,
+            "target": 0.5,
+            "details": "Revenue: $3,068,644,000, Assets: $8,113,960,000, Turnover: 0.38x"
+          },
+          {
+            "name": "Interest Coverage",
+            "description": "Operating Profit / Interest Expense > 3\u00d7",
+            "status": "PASS",
+            "value": 241.67752161383285,
+            "target": 3.0,
+            "details": "Operating Income: $838,621,000, Interest Expense: $3,470,000, Coverage: 241.7x"
+          },
+          {
+            "name": "Earnings Stability",
+            "description": "Positive earnings (current year)",
+            "status": "PASS",
+            "value": 1.0,
+            "target": 1.0,
+            "details": "Current Net Income: $1,016,357,000 (Positive)"
+          },
+          {
+            "name": "Capital Allocation",
+            "description": "ROE > 15% (value creation)",
+            "status": "PASS",
+            "value": 15.421646784130447,
+            "target": 15.0,
+            "details": "ROE: 15.4% - Management creates value"
+          }
+        ],
+        "key_financials": {
+          "Assets": 8113960000,
+          "CurrentAssets": 7586156000,
+          "Liabilities": 1425691000,
+          "CurrentLiabilities": 1180403000,
+          "Equity": 6590457000,
+          "CashAndEquivalents": 1615967000,
+          "Revenue": 3068644000,
+          "OperatingIncome": 838621000,
+          "NetIncome": 1016357000,
+          "InterestExpense": 3470000,
+          "OperatingCashFlow": 1357178000,
+          "CapitalExpenditures": 20610000,
+          "SharesOutstanding": 2383314000
+        }
+      },
+      "scores": {
+        "technical": 78.00961005359461,
+        "fundamental": 90.0,
+        "combined": 86.40288301607838
+      },
+      "data_freshness": {
+        "price_data_age_days": 1,
+        "analysis_timestamp": "2026-02-12T21:36:41.199327"
+      }
+    },
+    {
+      "ticker": "A",
+      "company_name": "Agilent Technologies,\u00a0Inc.",
+      "close_price": 128.9,
+      "technical_indicators": {
+        "williams_r_21": -86.8113864427606,
+        "rsi_14": 34.74808650557307,
+        "rsi_21": 37.759684509058445,
+        "ema_williams_r": -84.72695893345008,
+        "adx_14": 28.53202283464787,
+        "price_vs_sma200_pct": 0.09158885108600737,
+        "pct_from_52w_high": -19.573220190927813,
+        "pct_from_52w_low": 33.6720937467593,
+        "bb_position": 19.5554392777494,
+        "relative_volume": 1.067518369540177,
+        "macd_hist": -0.5856734377592607,
+        "hist_volatility": 25.685167713271362
+      },
+      "fundamental_analysis": {
+        "buffett_score": 9,
+        "total_formulas": 10,
+        "score_percentage": 90.0,
+        "formula_results": [
+          {
+            "name": "Cash Test",
+            "description": "Cash + Short-Term Investments > Total Debt",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.0,
+            "details": "Cash/Investments: $1,789,000,000, Debt: $0, Ratio: infx"
+          },
+          {
+            "name": "Debt-to-Equity",
+            "description": "Total Liabilities / Equity < 0.5",
+            "status": "FAIL",
+            "value": 0.8879988132324581,
+            "target": 0.5,
+            "details": "Liabilities: $5,986,000,000, Equity: $6,741,000,000, Ratio: 0.89"
+          },
+          {
+            "name": "Free Cash Flow to Debt",
+            "description": "Free Cash Flow / Total Debt > 0.25",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 0.25,
+            "details": "FCF: $0, Debt: $0, Ratio: inf"
+          },
+          {
+            "name": "Return on Equity",
+            "description": "Net Income / Equity > 15%",
+            "status": "PASS",
+            "value": 19.329476338822133,
+            "target": 15.0,
+            "details": "Net Income: $1,303,000,000, Equity: $6,741,000,000, ROE: 19.3%"
+          },
+          {
+            "name": "Current Ratio",
+            "description": "Current Assets / Current Liabilities > 1.5",
+            "status": "PASS",
+            "value": 1.9573924158500213,
+            "target": 1.5,
+            "details": "Current Assets: $4,594,000,000, Current Liabilities: $2,347,000,000, Ratio: 1.96x"
+          },
+          {
+            "name": "Operating Margin",
+            "description": "Operating Profit / Revenue > 12%",
+            "status": "PASS",
+            "value": 21.286701208981,
+            "target": 12.0,
+            "details": "Operating Income: $1,479,000,000, Revenue: $6,948,000,000, Margin: 21.3%"
+          },
+          {
+            "name": "Asset Turnover",
+            "description": "Revenue / Total Assets > 0.5",
+            "status": "PASS",
+            "value": 0.5459259841282313,
+            "target": 0.5,
+            "details": "Revenue: $6,948,000,000, Assets: $12,727,000,000, Turnover: 0.55x"
+          },
+          {
+            "name": "Interest Coverage",
+            "description": "Operating Profit / Interest Expense > 3\u00d7",
+            "status": "PASS",
+            "value": 13.205357142857142,
+            "target": 3.0,
+            "details": "Operating Income: $1,479,000,000, Interest Expense: $112,000,000, Coverage: 13.2x"
+          },
+          {
+            "name": "Earnings Stability",
+            "description": "Positive earnings (current year)",
+            "status": "PASS",
+            "value": 1.0,
+            "target": 1.0,
+            "details": "Current Net Income: $1,303,000,000 (Positive)"
+          },
+          {
+            "name": "Capital Allocation",
+            "description": "ROE > 15% (value creation)",
+            "status": "PASS",
+            "value": 19.329476338822133,
+            "target": 15.0,
+            "details": "ROE: 19.3% - Management creates value"
+          }
+        ],
+        "key_financials": {
+          "Assets": 12727000000,
+          "CurrentAssets": 4594000000,
+          "Liabilities": 5986000000,
+          "CurrentLiabilities": 2347000000,
+          "LongTermDebt": 3050000000,
+          "Equity": 6741000000,
+          "CashAndEquivalents": 1789000000,
+          "ShortTermInvestments": 0,
+          "Revenue": 6948000000,
+          "OperatingIncome": 1479000000,
+          "NetIncome": 1303000000,
+          "InterestExpense": 112000000,
+          "OperatingCashFlow": 1559000000,
+          "CapitalExpenditures": 407000000,
+          "SharesOutstanding": 283498871
+        }
+      },
+      "scores": {
+        "technical": 75.94306778619703,
+        "fundamental": 90.0,
+        "combined": 85.7829203358591
+      },
+      "data_freshness": {
+        "price_data_age_days": 1,
+        "analysis_timestamp": "2026-02-12T21:36:40.487996"
+      }
+    },
+    {
+      "ticker": "LULU",
+      "company_name": "lululemon athletica inc.",
+      "close_price": 175.86,
+      "technical_indicators": {
+        "williams_r_21": -85.88983980689048,
+        "rsi_14": 41.71650994266338,
+        "rsi_21": 43.0789179642445,
+        "ema_williams_r": -85.86271165427733,
+        "adx_14": 29.96359814234447,
+        "price_vs_sma200_pct": -16.550319466929984,
+        "pct_from_52w_high": -56.38501029240346,
+        "pct_from_52w_low": 10.429101138764798,
+        "bb_position": 30.662017436981,
+        "relative_volume": 0.6384172305390596,
+        "macd_hist": -0.39583258963220835,
+        "hist_volatility": 48.569036774576254
+      },
+      "fundamental_analysis": {
+        "buffett_score": 9,
+        "total_formulas": 10,
+        "score_percentage": 90.0,
+        "formula_results": [
+          {
+            "name": "Cash Test",
+            "description": "Cash + Short-Term Investments > Total Debt",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.0,
+            "details": "Cash/Investments: $881,320,000, Debt: $0, Ratio: infx"
+          },
+          {
+            "name": "Debt-to-Equity",
+            "description": "Total Liabilities / Equity < 0.5",
+            "status": "FAIL",
+            "value": 0.7670260680587372,
+            "target": 0.5,
+            "details": "Liabilities: $3,453,169,000, Equity: $4,502,023,000, Ratio: 0.77"
+          },
+          {
+            "name": "Free Cash Flow to Debt",
+            "description": "Free Cash Flow / Total Debt > 0.25",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 0.25,
+            "details": "FCF: $0, Debt: $0, Ratio: inf"
+          },
+          {
+            "name": "Return on Equity",
+            "description": "Net Income / Equity > 15%",
+            "status": "PASS",
+            "value": 22.041468912975347,
+            "target": 15.0,
+            "details": "Net Income: $992,312,000, Equity: $4,502,023,000, ROE: 22.0%"
+          },
+          {
+            "name": "Current Ratio",
+            "description": "Current Assets / Current Liabilities > 1.5",
+            "status": "PASS",
+            "value": 2.1299021430599305,
+            "target": 1.5,
+            "details": "Current Assets: $3,923,661,000, Current Liabilities: $1,842,179,000, Ratio: 2.13x"
+          },
+          {
+            "name": "Operating Margin",
+            "description": "Operating Profit / Revenue > 12%",
+            "status": "PASS",
+            "value": 18.739783797446165,
+            "target": 12.0,
+            "details": "Operating Income: $1,398,325,000, Revenue: $7,461,799,000, Margin: 18.7%"
+          },
+          {
+            "name": "Asset Turnover",
+            "description": "Revenue / Total Assets > 0.5",
+            "status": "PASS",
+            "value": 0.9379784925366981,
+            "target": 0.5,
+            "details": "Revenue: $7,461,799,000, Assets: $7,955,192,000, Turnover: 0.94x"
+          },
+          {
+            "name": "Interest Coverage",
+            "description": "Operating Profit / Interest Expense > 3\u00d7",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 3.0,
+            "details": "Operating Income: $1,398,325,000, Interest Expense: $0, Coverage: infx"
+          },
+          {
+            "name": "Earnings Stability",
+            "description": "Positive earnings (current year)",
+            "status": "PASS",
+            "value": 1.0,
+            "target": 1.0,
+            "details": "Current Net Income: $992,312,000 (Positive)"
+          },
+          {
+            "name": "Capital Allocation",
+            "description": "ROE > 15% (value creation)",
+            "status": "PASS",
+            "value": 22.041468912975347,
+            "target": 15.0,
+            "details": "ROE: 22.0% - Management creates value"
+          }
+        ],
+        "key_financials": {
+          "Assets": 7955192000,
+          "CurrentAssets": 3923661000,
+          "Liabilities": 3453169000,
+          "CurrentLiabilities": 1842179000,
+          "Equity": 4502023000,
+          "CashAndEquivalents": 881320000,
+          "Revenue": 7461799000,
+          "OperatingIncome": 1398325000,
+          "NetIncome": 992312000,
+          "OperatingCashFlow": 459606000,
+          "CapitalExpenditures": 497602000,
+          "SharesOutstanding": 112190041
+        }
+      },
+      "scores": {
+        "technical": 75.55080096554761,
+        "fundamental": 90.0,
+        "combined": 85.66524028966427
+      },
+      "data_freshness": {
+        "price_data_age_days": 1,
+        "analysis_timestamp": "2026-02-12T21:36:42.812878"
+      }
+    },
+    {
+      "ticker": "DXCM",
+      "company_name": "DEXCOM, INC.",
+      "close_price": 68.15,
+      "technical_indicators": {
+        "williams_r_21": -87.57694459988808,
+        "rsi_14": 40.30467561659258,
+        "rsi_21": 46.08122227274838,
+        "ema_williams_r": -52.285657603244964,
+        "adx_14": 28.90069028093314,
+        "price_vs_sma200_pct": -8.183522478869804,
+        "pct_from_52w_high": -26.916890080428946,
+        "pct_from_52w_low": 25.947144705230095,
+        "bb_position": 7.712557336679168,
+        "relative_volume": 0.9089189666322443,
+        "macd_hist": -0.7265342891255638,
+        "hist_volatility": 20.735361426004438
+      },
+      "fundamental_analysis": {
+        "buffett_score": 9,
+        "total_formulas": 10,
+        "score_percentage": 90.0,
+        "formula_results": [
+          {
+            "name": "Cash Test",
+            "description": "Cash + Short-Term Investments > Total Debt",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.0,
+            "details": "Cash/Investments: $917,700,000, Debt: $0, Ratio: infx"
+          },
+          {
+            "name": "Debt-to-Equity",
+            "description": "Total Liabilities / Equity < 0.5",
+            "status": "FAIL",
+            "value": 1.30877640203933,
+            "target": 0.5,
+            "details": "Liabilities: $3,593,900,000, Equity: $2,746,000,000, Ratio: 1.31"
+          },
+          {
+            "name": "Free Cash Flow to Debt",
+            "description": "Free Cash Flow / Total Debt > 0.25",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 0.25,
+            "details": "FCF: $0, Debt: $0, Ratio: inf"
+          },
+          {
+            "name": "Return on Equity",
+            "description": "Net Income / Equity > 15%",
+            "status": "PASS",
+            "value": 30.455207574654043,
+            "target": 15.0,
+            "details": "Net Income: $836,300,000, Equity: $2,746,000,000, ROE: 30.5%"
+          },
+          {
+            "name": "Current Ratio",
+            "description": "Current Assets / Current Liabilities > 1.5",
+            "status": "PASS",
+            "value": 1.8825204200700116,
+            "target": 1.5,
+            "details": "Current Assets: $4,033,300,000, Current Liabilities: $2,142,500,000, Ratio: 1.88x"
+          },
+          {
+            "name": "Operating Margin",
+            "description": "Operating Profit / Revenue > 12%",
+            "status": "PASS",
+            "value": 19.558129558129558,
+            "target": 12.0,
+            "details": "Operating Income: $911,800,000, Revenue: $4,662,000,000, Margin: 19.6%"
+          },
+          {
+            "name": "Asset Turnover",
+            "description": "Revenue / Total Assets > 0.5",
+            "status": "PASS",
+            "value": 0.7353428287512421,
+            "target": 0.5,
+            "details": "Revenue: $4,662,000,000, Assets: $6,339,900,000, Turnover: 0.74x"
+          },
+          {
+            "name": "Interest Coverage",
+            "description": "Operating Profit / Interest Expense > 3\u00d7",
+            "status": "PASS",
+            "value": 198.2173913043478,
+            "target": 3.0,
+            "details": "Operating Income: $911,800,000, Interest Expense: $4,600,000, Coverage: 198.2x"
+          },
+          {
+            "name": "Earnings Stability",
+            "description": "Positive earnings (current year)",
+            "status": "PASS",
+            "value": 1.0,
+            "target": 1.0,
+            "details": "Current Net Income: $836,300,000 (Positive)"
+          },
+          {
+            "name": "Capital Allocation",
+            "description": "ROE > 15% (value creation)",
+            "status": "PASS",
+            "value": 30.455207574654043,
+            "target": 15.0,
+            "details": "ROE: 30.5% - Management creates value"
+          }
+        ],
+        "key_financials": {
+          "Assets": 6339900000,
+          "CurrentAssets": 4033300000,
+          "Liabilities": 3593900000,
+          "CurrentLiabilities": 2142500000,
+          "LongTermDebt": 2900000,
+          "Equity": 2746000000,
+          "CashAndEquivalents": 917700000,
+          "Revenue": 4662000000,
+          "OperatingIncome": 911800000,
+          "NetIncome": 836300000,
+          "InterestExpense": 4600000,
+          "OperatingCashFlow": 1440700000,
+          "CapitalExpenditures": 363500000,
+          "SharesOutstanding": 384864842
+        }
+      },
+      "scores": {
+        "technical": 72.1152770005596,
+        "fundamental": 90.0,
+        "combined": 84.63458310016787
+      },
+      "data_freshness": {
+        "price_data_age_days": 1,
+        "analysis_timestamp": "2026-02-12T21:36:37.383214"
+      }
+    },
+    {
+      "ticker": "GOOGL",
+      "company_name": "Alphabet Inc.",
+      "close_price": 310.96,
+      "technical_indicators": {
+        "williams_r_21": -89.42172073342736,
+        "rsi_14": 35.65936195102524,
+        "rsi_21": 43.21552201474434,
+        "ema_williams_r": -47.002018250329876,
+        "adx_14": 26.178803462442378,
+        "price_vs_sma200_pct": 28.82351600869152,
+        "pct_from_52w_high": -10.899713467048716,
+        "pct_from_52w_low": 121.27659574468083,
+        "bb_position": -14.07523117364772,
+        "relative_volume": 1.171102679445118,
+        "macd_hist": -3.3951858024722936,
+        "hist_volatility": 22.08444136804871
+      },
+      "fundamental_analysis": {
+        "buffett_score": 9,
+        "total_formulas": 10,
+        "score_percentage": 90.0,
+        "formula_results": [
+          {
+            "name": "Cash Test",
+            "description": "Cash + Short-Term Investments > Total Debt",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.0,
+            "details": "Cash/Investments: $30,708,000,000, Debt: $0, Ratio: infx"
+          },
+          {
+            "name": "Debt-to-Equity",
+            "description": "Total Liabilities / Equity < 0.5",
+            "status": "PASS",
+            "value": 0.4334966828410774,
+            "target": 0.5,
+            "details": "Liabilities: $180,016,000,000, Equity: $415,265,000,000, Ratio: 0.43"
+          },
+          {
+            "name": "Free Cash Flow to Debt",
+            "description": "Free Cash Flow / Total Debt > 0.25",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 0.25,
+            "details": "FCF: $0, Debt: $0, Ratio: inf"
+          },
+          {
+            "name": "Return on Equity",
+            "description": "Net Income / Equity > 15%",
+            "status": "PASS",
+            "value": 31.82786895115167,
+            "target": 15.0,
+            "details": "Net Income: $132,170,000,000, Equity: $415,265,000,000, ROE: 31.8%"
+          },
+          {
+            "name": "Current Ratio",
+            "description": "Current Assets / Current Liabilities > 1.5",
+            "status": "PASS",
+            "value": 2.005333592875566,
+            "target": 1.5,
+            "details": "Current Assets: $206,038,000,000, Current Liabilities: $102,745,000,000, Ratio: 2.01x"
+          },
+          {
+            "name": "Operating Margin",
+            "description": "Operating Profit / Revenue > 12%",
+            "status": "PASS",
+            "value": 143.0048540461467,
+            "target": 12.0,
+            "details": "Operating Income: $129,039,000,000, Revenue: $90,234,000,000, Margin: 143.0%"
+          },
+          {
+            "name": "Asset Turnover",
+            "description": "Revenue / Total Assets > 0.5",
+            "status": "FAIL",
+            "value": 0.1515821939554597,
+            "target": 0.5,
+            "details": "Revenue: $90,234,000,000, Assets: $595,281,000,000, Turnover: 0.15x"
+          },
+          {
+            "name": "Interest Coverage",
+            "description": "Operating Profit / Interest Expense > 3\u00d7",
+            "status": "PASS",
+            "value": 1372.7553191489362,
+            "target": 3.0,
+            "details": "Operating Income: $129,039,000,000, Interest Expense: $94,000,000, Coverage: 1372.8x"
+          },
+          {
+            "name": "Earnings Stability",
+            "description": "Positive earnings (current year)",
+            "status": "PASS",
+            "value": 1.0,
+            "target": 1.0,
+            "details": "Current Net Income: $132,170,000,000 (Positive)"
+          },
+          {
+            "name": "Capital Allocation",
+            "description": "ROE > 15% (value creation)",
+            "status": "PASS",
+            "value": 31.82786895115167,
+            "target": 15.0,
+            "details": "ROE: 31.8% - Management creates value"
+          }
+        ],
+        "key_financials": {
+          "Assets": 595281000000,
+          "CurrentAssets": 206038000000,
+          "Liabilities": 180016000000,
+          "CurrentLiabilities": 102745000000,
+          "LongTermDebt": 49085000000,
+          "Equity": 415265000000,
+          "CashAndEquivalents": 30708000000,
+          "Revenue": 90234000000,
+          "OperatingIncome": 129039000000,
+          "NetIncome": 132170000000,
+          "InterestExpense": 94000000,
+          "OperatingCashFlow": 164713000000,
+          "CapitalExpenditures": 91447000000,
+          "SharesOutstanding": 12088000000
+        }
+      },
+      "scores": {
+        "technical": 67.89139633286318,
+        "fundamental": 90.0,
+        "combined": 83.36741889985895
+      },
+      "data_freshness": {
+        "price_data_age_days": 1,
+        "analysis_timestamp": "2026-02-12T21:36:36.692490"
+      }
+    },
+    {
+      "ticker": "GOOG",
+      "company_name": "Alphabet Inc.",
+      "close_price": 311.33,
+      "technical_indicators": {
+        "williams_r_21": -89.79875086745322,
+        "rsi_14": 35.75531514103365,
+        "rsi_21": 43.1933702123624,
+        "ema_williams_r": -47.71804048363544,
+        "adx_14": 25.98013883566814,
+        "price_vs_sma200_pct": 28.54334947230263,
+        "pct_from_52w_high": -11.08667713836927,
+        "pct_from_52w_low": 118.23216038132622,
+        "bb_position": -12.620188515159988,
+        "relative_volume": 0.9795564496625103,
+        "macd_hist": -3.4136202229488717,
+        "hist_volatility": 22.388004814694785
+      },
+      "fundamental_analysis": {
+        "buffett_score": 9,
+        "total_formulas": 10,
+        "score_percentage": 90.0,
+        "formula_results": [
+          {
+            "name": "Cash Test",
+            "description": "Cash + Short-Term Investments > Total Debt",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.0,
+            "details": "Cash/Investments: $30,708,000,000, Debt: $0, Ratio: infx"
+          },
+          {
+            "name": "Debt-to-Equity",
+            "description": "Total Liabilities / Equity < 0.5",
+            "status": "PASS",
+            "value": 0.4334966828410774,
+            "target": 0.5,
+            "details": "Liabilities: $180,016,000,000, Equity: $415,265,000,000, Ratio: 0.43"
+          },
+          {
+            "name": "Free Cash Flow to Debt",
+            "description": "Free Cash Flow / Total Debt > 0.25",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 0.25,
+            "details": "FCF: $0, Debt: $0, Ratio: inf"
+          },
+          {
+            "name": "Return on Equity",
+            "description": "Net Income / Equity > 15%",
+            "status": "PASS",
+            "value": 31.82786895115167,
+            "target": 15.0,
+            "details": "Net Income: $132,170,000,000, Equity: $415,265,000,000, ROE: 31.8%"
+          },
+          {
+            "name": "Current Ratio",
+            "description": "Current Assets / Current Liabilities > 1.5",
+            "status": "PASS",
+            "value": 2.005333592875566,
+            "target": 1.5,
+            "details": "Current Assets: $206,038,000,000, Current Liabilities: $102,745,000,000, Ratio: 2.01x"
+          },
+          {
+            "name": "Operating Margin",
+            "description": "Operating Profit / Revenue > 12%",
+            "status": "PASS",
+            "value": 143.0048540461467,
+            "target": 12.0,
+            "details": "Operating Income: $129,039,000,000, Revenue: $90,234,000,000, Margin: 143.0%"
+          },
+          {
+            "name": "Asset Turnover",
+            "description": "Revenue / Total Assets > 0.5",
+            "status": "FAIL",
+            "value": 0.1515821939554597,
+            "target": 0.5,
+            "details": "Revenue: $90,234,000,000, Assets: $595,281,000,000, Turnover: 0.15x"
+          },
+          {
+            "name": "Interest Coverage",
+            "description": "Operating Profit / Interest Expense > 3\u00d7",
+            "status": "PASS",
+            "value": 1372.7553191489362,
+            "target": 3.0,
+            "details": "Operating Income: $129,039,000,000, Interest Expense: $94,000,000, Coverage: 1372.8x"
+          },
+          {
+            "name": "Earnings Stability",
+            "description": "Positive earnings (current year)",
+            "status": "PASS",
+            "value": 1.0,
+            "target": 1.0,
+            "details": "Current Net Income: $132,170,000,000 (Positive)"
+          },
+          {
+            "name": "Capital Allocation",
+            "description": "ROE > 15% (value creation)",
+            "status": "PASS",
+            "value": 31.82786895115167,
+            "target": 15.0,
+            "details": "ROE: 31.8% - Management creates value"
+          }
+        ],
+        "key_financials": {
+          "Assets": 595281000000,
+          "CurrentAssets": 206038000000,
+          "Liabilities": 180016000000,
+          "CurrentLiabilities": 102745000000,
+          "LongTermDebt": 49085000000,
+          "Equity": 415265000000,
+          "CashAndEquivalents": 30708000000,
+          "Revenue": 90234000000,
+          "OperatingIncome": 129039000000,
+          "NetIncome": 132170000000,
+          "InterestExpense": 94000000,
+          "OperatingCashFlow": 164713000000,
+          "CapitalExpenditures": 91447000000,
+          "SharesOutstanding": 12088000000
+        }
+      },
+      "scores": {
+        "technical": 66.00624566273389,
+        "fundamental": 90.0,
+        "combined": 82.80187369882016
+      },
+      "data_freshness": {
+        "price_data_age_days": 1,
+        "analysis_timestamp": "2026-02-12T21:36:36.670785"
+      }
+    },
+    {
+      "ticker": "EXPE",
+      "company_name": "EXPEDIA GROUP, INC.",
+      "close_price": 233.6,
+      "technical_indicators": {
+        "williams_r_21": -85.11099770349581,
+        "rsi_14": 34.99113889612847,
+        "rsi_21": 38.47273474365119,
+        "ema_williams_r": -79.5820281746189,
+        "adx_14": 31.04843525950812,
+        "price_vs_sma200_pct": 7.247431094615841,
+        "pct_from_52w_high": -23.10730743910468,
+        "pct_from_52w_low": 79.67848627028691,
+        "bb_position": 15.629554523984115,
+        "relative_volume": 1.3145084747304818,
+        "macd_hist": -3.47009459953553,
+        "hist_volatility": 66.084133051447
+      },
+      "fundamental_analysis": {
+        "buffett_score": 8,
+        "total_formulas": 10,
+        "score_percentage": 80.0,
+        "formula_results": [
+          {
+            "name": "Cash Test",
+            "description": "Cash + Short-Term Investments > Total Debt",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.0,
+            "details": "Cash/Investments: $6,170,000,000, Debt: $0, Ratio: infx"
+          },
+          {
+            "name": "Debt-to-Equity",
+            "description": "Total Liabilities / Equity < 0.5",
+            "status": "PASS",
+            "value": 0.0,
+            "target": 0.5,
+            "details": "Liabilities: $0, Equity: $1,337,000,000, Ratio: 0.00"
+          },
+          {
+            "name": "Free Cash Flow to Debt",
+            "description": "Free Cash Flow / Total Debt > 0.25",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 0.25,
+            "details": "FCF: $0, Debt: $0, Ratio: inf"
+          },
+          {
+            "name": "Return on Equity",
+            "description": "Net Income / Equity > 15%",
+            "status": "PASS",
+            "value": 81.45100972326104,
+            "target": 15.0,
+            "details": "Net Income: $1,089,000,000, Equity: $1,337,000,000, ROE: 81.5%"
+          },
+          {
+            "name": "Current Ratio",
+            "description": "Current Assets / Current Liabilities > 1.5",
+            "status": "FAIL",
+            "value": 0.7444096860155255,
+            "target": 1.5,
+            "details": "Current Assets: $12,850,000,000, Current Liabilities: $17,262,000,000, Ratio: 0.74x"
+          },
+          {
+            "name": "Operating Margin",
+            "description": "Operating Profit / Revenue > 12%",
+            "status": "PASS",
+            "value": 12.97157160736635,
+            "target": 12.0,
+            "details": "Operating Income: $1,451,000,000, Revenue: $11,186,000,000, Margin: 13.0%"
+          },
+          {
+            "name": "Asset Turnover",
+            "description": "Revenue / Total Assets > 0.5",
+            "status": "FAIL",
+            "value": 0.445515373586108,
+            "target": 0.5,
+            "details": "Revenue: $11,186,000,000, Assets: $25,108,000,000, Turnover: 0.45x"
+          },
+          {
+            "name": "Interest Coverage",
+            "description": "Operating Profit / Interest Expense > 3\u00d7",
+            "status": "PASS",
+            "value": 23.403225806451612,
+            "target": 3.0,
+            "details": "Operating Income: $1,451,000,000, Interest Expense: $62,000,000, Coverage: 23.4x"
+          },
+          {
+            "name": "Earnings Stability",
+            "description": "Positive earnings (current year)",
+            "status": "PASS",
+            "value": 1.0,
+            "target": 1.0,
+            "details": "Current Net Income: $1,089,000,000 (Positive)"
+          },
+          {
+            "name": "Capital Allocation",
+            "description": "ROE > 15% (value creation)",
+            "status": "PASS",
+            "value": 81.45100972326104,
+            "target": 15.0,
+            "details": "ROE: 81.5% - Management creates value"
+          }
+        ],
+        "key_financials": {
+          "Assets": 25108000000,
+          "CurrentAssets": 12850000000,
+          "CurrentLiabilities": 17262000000,
+          "LongTermDebt": 6216000000,
+          "Equity": 1337000000,
+          "CashAndEquivalents": 5826000000,
+          "ShortTermInvestments": 344000000,
+          "Revenue": 11186000000,
+          "OperatingIncome": 1451000000,
+          "NetIncome": 1089000000,
+          "InterestExpense": 62000000,
+          "OperatingCashFlow": 3576000000,
+          "CapitalExpenditures": 585000000,
+          "SharesOutstanding": 117514000
+        }
+      },
+      "scores": {
+        "technical": 84.44501148252094,
+        "fundamental": 80.0,
+        "combined": 81.33350344475627
+      },
+      "data_freshness": {
+        "price_data_age_days": 1,
+        "analysis_timestamp": "2026-02-12T21:36:45.985017"
+      }
+    },
+    {
+      "ticker": "GEHC",
+      "company_name": "GE HEALTHCARE TECHNOLOGIES INC.",
+      "close_price": 79.2,
+      "technical_indicators": {
+        "williams_r_21": -84.59214501510571,
+        "rsi_14": 43.784251137343,
+        "rsi_21": 45.93265506130997,
+        "ema_williams_r": -78.63078316848156,
+        "adx_14": 17.910210020446787,
+        "price_vs_sma200_pct": 4.2161485027483065,
+        "pct_from_52w_high": -16.455696202531637,
+        "pct_from_52w_low": 37.38074588031224,
+        "bb_position": 30.28458327688114,
+        "relative_volume": 0.8826769859489555,
+        "macd_hist": -0.10368950683857192,
+        "hist_volatility": 32.1471753035825
+      },
+      "fundamental_analysis": {
+        "buffett_score": 8,
+        "total_formulas": 10,
+        "score_percentage": 80.0,
+        "formula_results": [
+          {
+            "name": "Cash Test",
+            "description": "Cash + Short-Term Investments > Total Debt",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 1.0,
+            "details": "Cash/Investments: $4,492,000,000, Debt: $0, Ratio: infx"
+          },
+          {
+            "name": "Debt-to-Equity",
+            "description": "Total Liabilities / Equity < 0.5",
+            "status": "FAIL",
+            "value": 2.534637248289816,
+            "target": 0.5,
+            "details": "Liabilities: $26,307,000,000, Equity: $10,379,000,000, Ratio: 2.53"
+          },
+          {
+            "name": "Free Cash Flow to Debt",
+            "description": "Free Cash Flow / Total Debt > 0.25",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 0.25,
+            "details": "FCF: $0, Debt: $0, Ratio: inf"
+          },
+          {
+            "name": "Return on Equity",
+            "description": "Net Income / Equity > 15%",
+            "status": "PASS",
+            "value": 20.07900568455535,
+            "target": 15.0,
+            "details": "Net Income: $2,084,000,000, Equity: $10,379,000,000, ROE: 20.1%"
+          },
+          {
+            "name": "Current Ratio",
+            "description": "Current Assets / Current Liabilities > 1.5",
+            "status": "FAIL",
+            "value": 1.3729818780889622,
+            "target": 1.5,
+            "details": "Current Assets: $12,501,000,000, Current Liabilities: $9,105,000,000, Ratio: 1.37x"
+          },
+          {
+            "name": "Operating Margin",
+            "description": "Operating Profit / Revenue > 12%",
+            "status": "PASS",
+            "value": 13.396363636363636,
+            "target": 12.0,
+            "details": "Operating Income: $2,763,000,000, Revenue: $20,625,000,000, Margin: 13.4%"
+          },
+          {
+            "name": "Asset Turnover",
+            "description": "Revenue / Total Assets > 0.5",
+            "status": "PASS",
+            "value": 0.5588522191513575,
+            "target": 0.5,
+            "details": "Revenue: $20,625,000,000, Assets: $36,906,000,000, Turnover: 0.56x"
+          },
+          {
+            "name": "Interest Coverage",
+            "description": "Operating Profit / Interest Expense > 3\u00d7",
+            "status": "PASS",
+            "value": Infinity,
+            "target": 3.0,
+            "details": "Operating Income: $2,763,000,000, Interest Expense: $0, Coverage: infx"
+          },
+          {
+            "name": "Earnings Stability",
+            "description": "Positive earnings (current year)",
+            "status": "PASS",
+            "value": 1.0,
+            "target": 1.0,
+            "details": "Current Net Income: $2,084,000,000 (Positive)"
+          },
+          {
+            "name": "Capital Allocation",
+            "description": "ROE > 15% (value creation)",
+            "status": "PASS",
+            "value": 20.07900568455535,
+            "target": 15.0,
+            "details": "ROE: 20.1% - Management creates value"
+          }
+        ],
+        "key_financials": {
+          "Assets": 36906000000,
+          "CurrentAssets": 12501000000,
+          "Liabilities": 26307000000,
+          "CurrentLiabilities": 9105000000,
+          "LongTermDebt": 10003000000,
+          "Equity": 10379000000,
+          "CashAndEquivalents": 4492000000,
+          "Revenue": 20625000000,
+          "OperatingIncome": 2763000000,
+          "NetIncome": 2084000000,
+          "OperatingCashFlow": 344000000,
+          "CapitalExpenditures": 213000000,
+          "SharesOutstanding": 455749767
+        }
+      },
+      "scores": {
+        "technical": 77.03927492447143,
+        "fundamental": 80.0,
+        "combined": 79.11178247734142
+      },
+      "data_freshness": {
+        "price_data_age_days": 1,
+        "analysis_timestamp": "2026-02-12T21:36:47.439151"
+      }
+    }
+  ]
+}
