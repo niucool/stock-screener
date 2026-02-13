@@ -14,6 +14,27 @@ const StockTable = ({ data }) => {
   const [selectedStock, setSelectedStock] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
+  // Ensure data is an array to prevent crashes
+  if (!Array.isArray(data)) {
+    console.error('StockTable Error: data is not an array:', data);
+    let debugInfo = '';
+    try {
+      debugInfo = JSON.stringify(data).slice(0, 200);
+    } catch (e) {
+      debugInfo = String(data);
+    }
+    return (
+      <Alert severity="error">
+        <AlertTitle>Error: Invalid Data Format</AlertTitle>
+        Expected an array but received: <strong>{typeof data}</strong>
+        <br />
+        <code style={{ display: 'block', marginTop: '10px', whiteSpace: 'pre-wrap' }}>
+          {debugInfo}
+        </code>
+      </Alert>
+    );
+  }
+
   // Define the columns for the DataGrid with updated field names
   const columns = [
     { field: 'Symbol', headerName: 'Symbol', width: 100 },
@@ -116,7 +137,7 @@ const StockTable = ({ data }) => {
           Stock data is <strong>{dataAgeDays} days old</strong> (last updated: <strong>{firstStock.Date}</strong>).
           {dataAgeDays > 100 && (
             <> This likely indicates a <strong>system date issue</strong>.
-            Please verify your system clock is set correctly before refreshing data.</>
+              Please verify your system clock is set correctly before refreshing data.</>
           )}
           {' '}Click the <strong>"Refresh Data"</strong> button in the header to update with the latest market data.
         </Alert>

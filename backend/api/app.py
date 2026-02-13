@@ -7,6 +7,7 @@ import json
 import pandas as pd
 import sqlite3
 import logging
+import math
 from job_manager import job_manager
 
 app = Flask(__name__)
@@ -124,6 +125,11 @@ def row_to_dict(row):
         # Convert memoryview to bytes first, then to appropriate type
         if isinstance(value, memoryview):
             value = bytes(value)
+
+        # Handle NaN and Infinity for valid JSON
+        if isinstance(value, float):
+            if math.isnan(value) or math.isinf(value):
+                value = None
 
         # Store value with proper type
         result[json_field] = value
