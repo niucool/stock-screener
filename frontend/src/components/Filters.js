@@ -4,17 +4,21 @@ import React from 'react';
 import { Grid, TextField, Button, Box } from '@mui/material';
 
 const FILTER_RANGES = {
-  williamsR: { from: -100, to: 0 },
-  emaWilliamsR: { from: -100, to: 100 }, // Example range; adjust as needed
-  rsi14: { from: 0, to: 100 },
-  rsi21: { from: 0, to: 100 },
+  Williams_R_21: { from: -100, to: 0 },
+  EMA_13_Williams_R: { from: -100, to: 100 },
+  RSI_14: { from: 0, to: 100 },
+  RSI_21: { from: 0, to: 100 },
 };
 
 const Filters = ({ filters, setFilters }) => {
   // Handle changes for from and to inputs
   const handleChange = (e) => {
-    const { name, value, dataset } = e.target;
-    const [field, bound] = name.split('_'); // e.g., 'williamsR_from' -> ['williamsR', 'from']
+    // The name will be something like "Williams_R_21_from"
+    // We need to split by the LAST underscore to separate field from bound
+    const { name, value } = e.target;
+    const lastUnderscoreIndex = name.lastIndexOf('_');
+    const field = name.substring(0, lastUnderscoreIndex);
+    const bound = name.substring(lastUnderscoreIndex + 1);
 
     setFilters((prev) => ({
       ...prev,
@@ -28,10 +32,10 @@ const Filters = ({ filters, setFilters }) => {
   // Handle reset functionality
   const handleReset = () => {
     setFilters({
-      williamsR: { from: '', to: '' },
-      emaWilliamsR: { from: '', to: '' },
-      rsi14: { from: '', to: '' },
-      rsi21: { from: '', to: '' },
+      Williams_R_21: { from: '', to: '' },
+      EMA_13_Williams_R: { from: '', to: '' },
+      RSI_14: { from: '', to: '' },
+      RSI_21: { from: '', to: '' },
     });
   };
 
@@ -44,18 +48,18 @@ const Filters = ({ filters, setFilters }) => {
             label="Williams %R From"
             variant="outlined"
             fullWidth
-            name="williamsR_from"
-            value={filters.williamsR.from}
+            name="Williams_R_21_from"
+            value={filters.Williams_R_21.from}
             onChange={handleChange}
             type="number"
             InputProps={{
               inputProps: {
-                min: FILTER_RANGES.williamsR.from,
-                max: FILTER_RANGES.williamsR.to,
+                min: FILTER_RANGES.Williams_R_21.from,
+                max: FILTER_RANGES.Williams_R_21.to,
                 step: 0.01,
               },
             }}
-            helperText={`Range: ${FILTER_RANGES.williamsR.from} to ${FILTER_RANGES.williamsR.to}`}
+            helperText={`Range: ${FILTER_RANGES.Williams_R_21.from} to ${FILTER_RANGES.Williams_R_21.to}`}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -63,18 +67,18 @@ const Filters = ({ filters, setFilters }) => {
             label="Williams %R To"
             variant="outlined"
             fullWidth
-            name="williamsR_to"
-            value={filters.williamsR.to}
+            name="Williams_R_21_to"
+            value={filters.Williams_R_21.to}
             onChange={handleChange}
             type="number"
             InputProps={{
               inputProps: {
-                min: FILTER_RANGES.williamsR.from,
-                max: FILTER_RANGES.williamsR.to,
+                min: FILTER_RANGES.Williams_R_21.from,
+                max: FILTER_RANGES.Williams_R_21.to,
                 step: 0.01,
               },
             }}
-            helperText={`Range: ${FILTER_RANGES.williamsR.from} to ${FILTER_RANGES.williamsR.to}`}
+            helperText={`Range: ${FILTER_RANGES.Williams_R_21.from} to ${FILTER_RANGES.Williams_R_21.to}`}
           />
         </Grid>
 
@@ -84,18 +88,18 @@ const Filters = ({ filters, setFilters }) => {
             label="EMA(13) Williams %R From"
             variant="outlined"
             fullWidth
-            name="emaWilliamsR_from"
-            value={filters.emaWilliamsR.from}
+            name="EMA_13_Williams_R_from"
+            value={filters.EMA_13_Williams_R.from}
             onChange={handleChange}
             type="number"
             InputProps={{
               inputProps: {
-                min: FILTER_RANGES.emaWilliamsR.from,
-                max: FILTER_RANGES.emaWilliamsR.to,
+                min: FILTER_RANGES.EMA_13_Williams_R.from,
+                max: FILTER_RANGES.EMA_13_Williams_R.to,
                 step: 0.01,
               },
             }}
-            helperText={`Range: ${FILTER_RANGES.emaWilliamsR.from} to ${FILTER_RANGES.emaWilliamsR.to}`}
+            helperText={`Range: ${FILTER_RANGES.EMA_13_Williams_R.from} to ${FILTER_RANGES.EMA_13_Williams_R.to}`}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -103,18 +107,18 @@ const Filters = ({ filters, setFilters }) => {
             label="EMA(13) Williams %R To"
             variant="outlined"
             fullWidth
-            name="emaWilliamsR_to"
-            value={filters.emaWilliamsR.to}
+            name="EMA_13_Williams_R_to"
+            value={filters.EMA_13_Williams_R.to}
             onChange={handleChange}
             type="number"
             InputProps={{
               inputProps: {
-                min: FILTER_RANGES.emaWilliamsR.from,
-                max: FILTER_RANGES.emaWilliamsR.to,
+                min: FILTER_RANGES.EMA_13_Williams_R.from,
+                max: FILTER_RANGES.EMA_13_Williams_R.to,
                 step: 0.01,
               },
             }}
-            helperText={`Range: ${FILTER_RANGES.emaWilliamsR.from} to ${FILTER_RANGES.emaWilliamsR.to}`}
+            helperText={`Range: ${FILTER_RANGES.EMA_13_Williams_R.from} to ${FILTER_RANGES.EMA_13_Williams_R.to}`}
           />
         </Grid>
 
@@ -124,18 +128,18 @@ const Filters = ({ filters, setFilters }) => {
             label="RSI 14 From"
             variant="outlined"
             fullWidth
-            name="rsi14_from"
-            value={filters.rsi14.from}
+            name="RSI_14_from"
+            value={filters.RSI_14.from}
             onChange={handleChange}
             type="number"
             InputProps={{
               inputProps: {
-                min: FILTER_RANGES.rsi14.from,
-                max: FILTER_RANGES.rsi14.to,
+                min: FILTER_RANGES.RSI_14.from,
+                max: FILTER_RANGES.RSI_14.to,
                 step: 0.01,
               },
             }}
-            helperText={`Range: ${FILTER_RANGES.rsi14.from} to ${FILTER_RANGES.rsi14.to}`}
+            helperText={`Range: ${FILTER_RANGES.RSI_14.from} to ${FILTER_RANGES.RSI_14.to}`}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -143,18 +147,18 @@ const Filters = ({ filters, setFilters }) => {
             label="RSI 14 To"
             variant="outlined"
             fullWidth
-            name="rsi14_to"
-            value={filters.rsi14.to}
+            name="RSI_14_to"
+            value={filters.RSI_14.to}
             onChange={handleChange}
             type="number"
             InputProps={{
               inputProps: {
-                min: FILTER_RANGES.rsi14.from,
-                max: FILTER_RANGES.rsi14.to,
+                min: FILTER_RANGES.RSI_14.from,
+                max: FILTER_RANGES.RSI_14.to,
                 step: 0.01,
               },
             }}
-            helperText={`Range: ${FILTER_RANGES.rsi14.from} to ${FILTER_RANGES.rsi14.to}`}
+            helperText={`Range: ${FILTER_RANGES.RSI_14.from} to ${FILTER_RANGES.RSI_14.to}`}
           />
         </Grid>
 
@@ -164,18 +168,18 @@ const Filters = ({ filters, setFilters }) => {
             label="RSI 21 From"
             variant="outlined"
             fullWidth
-            name="rsi21_from"
-            value={filters.rsi21.from}
+            name="RSI_21_from"
+            value={filters.RSI_21.from}
             onChange={handleChange}
             type="number"
             InputProps={{
               inputProps: {
-                min: FILTER_RANGES.rsi21.from,
-                max: FILTER_RANGES.rsi21.to,
+                min: FILTER_RANGES.RSI_21.from,
+                max: FILTER_RANGES.RSI_21.to,
                 step: 0.01,
               },
             }}
-            helperText={`Range: ${FILTER_RANGES.rsi21.from} to ${FILTER_RANGES.rsi21.to}`}
+            helperText={`Range: ${FILTER_RANGES.RSI_21.from} to ${FILTER_RANGES.RSI_21.to}`}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
@@ -183,18 +187,18 @@ const Filters = ({ filters, setFilters }) => {
             label="RSI 21 To"
             variant="outlined"
             fullWidth
-            name="rsi21_to"
-            value={filters.rsi21.to}
+            name="RSI_21_to"
+            value={filters.RSI_21.to}
             onChange={handleChange}
             type="number"
             InputProps={{
               inputProps: {
-                min: FILTER_RANGES.rsi21.from,
-                max: FILTER_RANGES.rsi21.to,
+                min: FILTER_RANGES.RSI_21.from,
+                max: FILTER_RANGES.RSI_21.to,
                 step: 0.01,
               },
             }}
-            helperText={`Range: ${FILTER_RANGES.rsi21.from} to ${FILTER_RANGES.rsi21.to}`}
+            helperText={`Range: ${FILTER_RANGES.RSI_21.from} to ${FILTER_RANGES.RSI_21.to}`}
           />
         </Grid>
 

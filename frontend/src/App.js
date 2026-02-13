@@ -9,10 +9,10 @@ import { fetchStockData } from './services/api';
 
 function App() {
   const [filters, setFilters] = useState({
-    williamsR: { from: '', to: '' },
-    emaWilliamsR: { from: '', to: '' },
-    rsi14: { from: '', to: '' },
-    rsi21: { from: '', to: '' },
+    Williams_R_21: { from: '', to: '' },
+    EMA_13_Williams_R: { from: '', to: '' },
+    RSI_14: { from: '', to: '' },
+    RSI_21: { from: '', to: '' },
   });
   const [stockData, setStockData] = useState([]);
   const [loading, setLoading] = useState(false);
